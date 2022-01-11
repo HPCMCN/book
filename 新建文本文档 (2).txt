@@ -1,2 +1,2 @@
-SECRET="2222"
-www.baidu.site
+SECRET="22***2"
+www.b***u.site
