@@ -43,7 +43,7 @@
 
 ### 2.2 暴力激活
 
-破解工具: [下载](./image/05-PyCharm%E4%BD%BF%E7%94%A8/jt.jar)
+破解工具: [下载](.image/05-PyCharm/jt.jar)
 
 1. 打开PyCharm
 
@@ -143,13 +143,13 @@ ctrl+x
 
 ## 4.3 禁用test模式
 
-![img](image/05-PyCharm/7080f8ca-401a-4916-b306-00d242b825bc.png)
+![img](.image/05-PyCharm/7080f8ca-401a-4916-b306-00d242b825bc.png)
 
 然后删除当前运行的配置:
 
-![img](image/05-PyCharm/edc8c950-9ce4-48dd-9a87-cbca813dcebc.png)
+![img](.image/05-PyCharm/edc8c950-9ce4-48dd-9a87-cbca813dcebc.png)
 
-![img](image/05-PyCharm/e617050a-f507-4fcd-b198-5411fcf0bd04.png)
+![img](.image/05-PyCharm/e617050a-f507-4fcd-b198-5411fcf0bd04.png)
 
 然后重新运行即可
 
@@ -163,7 +163,7 @@ ctrl+x
 
 * 方法一: 重新载入项目
 
-  ![image-20200928215135502](image/05-PyCharm/image-20200928215135502.png)
+  ![image-20200928215135502](.image/05-PyCharm/image-20200928215135502.png)
 
 
 

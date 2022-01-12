@@ -19,7 +19,7 @@ UDP是用户数据包协议(User Datagram Protocol)
 
 
 
-![图片描述](01-UDP%E5%8D%8F%E8%AE%AE.assets/5e44af320001a2af14740186.png)
+![图片描述](.image/02-UDP%E5%8D%8F%E8%AE%AE/5e44af320001a2af14740186.png)
 
 * 源端口号
 

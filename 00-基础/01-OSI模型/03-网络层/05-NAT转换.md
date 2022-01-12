@@ -20,13 +20,13 @@ NAT(Network Address Translation), 网络地址转换.
 
 ### 1.2.1 动态NAT工作原理
 
-![图片描述](05-NAT%E8%BD%AC%E6%8D%A2.assets/5e532e760001f9d510901022.png)
+![图片描述](.image/05-NAT%E8%BD%AC%E6%8D%A2/5e532e760001f9d510901022.png)
 
 * 第一步
 
   192.168.0.1发送以太网帧到路由器192.168.0.254的mac地址
 
-  ![图片描述](05-NAT%E8%BD%AC%E6%8D%A2.assets/5e55f04f000151a217280190.png)
+  ![图片描述](.image/05-NAT%E8%BD%AC%E6%8D%A2/5e55f04f000151a217280190.png)
 
   
 
@@ -34,7 +34,7 @@ NAT(Network Address Translation), 网络地址转换.
 
   路由器收到后, 会对数据包使用NAT技术, 将源IP变更为当前公网IP, 重新将以太网帧发送出去.
 
-  ![图片描述](05-NAT%E8%BD%AC%E6%8D%A2.assets/5e55f056000158d317230183.png)
+  ![图片描述](.image/05-NAT%E8%BD%AC%E6%8D%A2/5e55f056000158d317230183.png)
 
   并使用NAT表记录: 源IP, 目标IP, 源端口, 目标端口信息.
 
@@ -55,11 +55,11 @@ NAT(Network Address Translation), 网络地址转换.
 
   当服务端收到该数据帧后, 会做出相应. 发出对应的数据帧
 
-  ![image-20200516161106234](05-NAT%E8%BD%AC%E6%8D%A2.assets/image-20200516161106234.png)
+  ![image-20200516161106234](.image/05-NAT%E8%BD%AC%E6%8D%A2/image-20200516161106234.png)
 
 由于路由NAT转换提取到了Port, 所以对于网络数据OSI模型传递大概如下:
 
-![图片描述](05-NAT%E8%BD%AC%E6%8D%A2.assets/5e5f5889000175aa24121368.png)
+![图片描述](.image/05-NAT%E8%BD%AC%E6%8D%A2/5e5f5889000175aa24121368.png)
 
 # 2. 端口转发
 

@@ -6,7 +6,7 @@
 
 ## 1.2 分支树
 
-![图片描述](03-DNS%E5%8D%8F%E8%AE%AE.assets/5e6afa7d0001b14f13080836.png)
+![图片描述](.image/03-DNS%E5%8D%8F%E8%AE%AE/5e6afa7d0001b14f13080836.png)
 
 * **说明**
   1. 一级域名

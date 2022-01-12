@@ -70,7 +70,7 @@ TCP为传输控制协议(Transmission Control Protocol)
 在网线的构造中, 发送方和接受方的网线是需要走不通的线路. TCP协议认为, 在一个方向上有通讯, 在另一个方向上也有通讯. 所以TCP是全双工(Full Duplex)的, 也可进行半双工通讯
 所以三次握手的流程应该是这样的:
 
-![img](03-TCP%E5%8D%8F%E8%AE%AE.assets/tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png)
+![img](.image/03-TCP%E5%8D%8F%E8%AE%AE/tcp%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B.png)
 
 
 至此TCP通信已经成功建立的连接
@@ -191,11 +191,11 @@ TCP为传输控制协议(Transmission Control Protocol)
 
 所以正常的通信全过程是这样的:
 
-![img](03-TCP%E5%8D%8F%E8%AE%AE.assets/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E3%80%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png)
+![img](.image/03-TCP%E5%8D%8F%E8%AE%AE/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E3%80%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B.png)
 
 ## 2.2 报文信息
 
-![img](03-TCP%E5%8D%8F%E8%AE%AE.assets/64380cd7912397ddb480a4110c5c4ab2d1a28709.jpeg)
+![img](.image/03-TCP%E5%8D%8F%E8%AE%AE/64380cd7912397ddb480a4110c5c4ab2d1a28709.jpeg)
 
 **说明:**
 
