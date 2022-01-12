@@ -85,7 +85,7 @@
    subnet 10.10.10.0 netmask 255.255.255.0 {        #意思是我所分配的ip地址所在的网段为192.168.145.0 子网掩码为255.255.255.0
      range 10.10.10.100 10.10.10.200;            #租用IP地址的范围
      option domain-name-servers 8.8.8.8,114.114.114.114;
-     option domain-name "example.org";
+     option domain-name "e***e.org";
      option routers 10.10.10.1;                    #路由器地址，这里是当前 dhcp 机器的IP地址
      option subnet-mask 255.255.255.0;                  #子网掩码
      default-lease-time 600;                            #默认租约时间
@@ -136,7 +136,7 @@ chkconfig dhcpd on
      配置如下:
      
      ```python
-     # option domain-name "example.org"  # 配置DNS解析服务器域名
+     # option domain-name "e***e.org"  # 配置DNS解析服务器域名
      尾部追加:
      subnet 10.0.2.0 netmask 255.255.255.0 {
        range 10.0.2.10 10.0.2.100;

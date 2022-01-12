@@ -1,2 +1,0 @@
-SECRET="22***2"
-www.b***u.site
