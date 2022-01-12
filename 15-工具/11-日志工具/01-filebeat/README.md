@@ -1,0 +1,1 @@
+语法参照: http://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/mutate.html
