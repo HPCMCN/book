@@ -38,4 +38,4 @@ def write_summary(tsm, idt=0):
 
 content = write_summary(generate_summary())
 with open("SUMMARY.md", "w+", encoding="utf-8") as fp:
-    fp.write("# Book\n" + content)
+    fp.write("# Book\n" + content.replace("\\", "/"))
