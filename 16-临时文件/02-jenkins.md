@@ -35,11 +35,11 @@ systemctl start jenkins
 
 点击Manage Jenkins -- Global Tool Configuration
 
-![image-20210125154202307](image/02-jenkins/image-20210125154202307.png)
+![image-20210125154202307](.image/02-jenkins/image-20210125154202307.png)
 
 ## 3.2 配置git账号
 
-![image-20210125155015276](image/02-jenkins/image-20210125155015276.png)
+![image-20210125155015276](.image/02-jenkins/image-20210125155015276.png)
 
 # 4. 配置工程
 
@@ -47,7 +47,7 @@ systemctl start jenkins
 
 ### 4.1.1 创建一个任务
 
-![image-20210125155215818](image/02-jenkins/image-20210125155215818.png)
+![image-20210125155215818](.image/02-jenkins/image-20210125155215818.png)
 
 ### 4.1.2 配置任务
 
@@ -61,17 +61,17 @@ systemctl start jenkins
 
    此变量在项目启动时, 直接传递到shell中,
 
-   ![image-20210125155715997](image/02-jenkins/image-20210125155715997.png)
+   ![image-20210125155715997](.image/02-jenkins/image-20210125155715997.png)
 
 3. git配置
 
-   ![image-20210125155755113](image/02-jenkins/image-20210125155755113.png)
+   ![image-20210125155755113](.image/02-jenkins/image-20210125155755113.png)
 
 
 
  4. 构建shell任务
 
-    ![image-20210125155823563](image/02-jenkins/image-20210125155823563.png)
+    ![image-20210125155823563](.image/02-jenkins/image-20210125155823563.png)
 
 ## 4.2 Pipeline Job
 

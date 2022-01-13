@@ -2,23 +2,23 @@
 
 * 打开虚拟网络编辑器
 
-  ![190adf68-931c-45ea-b134-506849fbadeb](image/10-Nat%E9%85%8D%E7%BD%AE/190adf68-931c-45ea-b134-506849fbadeb.jpg)
+  ![190adf68-931c-45ea-b134-506849fbadeb](.image/10-NAT%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/190adf68-931c-45ea-b134-506849fbadeb.jpg)
 
 * 随便选择一张虚拟网卡, 进行如下配置
 
-  ![image-20200924221107830](image/10-Nat%E9%85%8D%E7%BD%AE/image-20200924221107830.png)
+  ![image-20200924221107830](.image/10-NAT%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/image-20200924221107830.png)
 
 * 配置网关和IP范围
 
-  ![image-20200924221411122](image/10-Nat%E9%85%8D%E7%BD%AE/image-20200924221411122.png)
+  ![image-20200924221411122](.image/10-NAT%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/image-20200924221411122.png)
 
 # 2. 虚拟机配置
 
 * 选择当前虚拟机, 配置使用的网卡
 
-  ![image-20200924221559714](image/10-Nat%E9%85%8D%E7%BD%AE/image-20200924221559714.png)
+  ![image-20200924221559714](.image/10-NAT%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/image-20200924221559714.png)
 
-![image-20200924221658840](image/10-Nat%E9%85%8D%E7%BD%AE/image-20200924221658840.png)
+![image-20200924221658840](.image/10-NAT%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/image-20200924221658840.png)
 
 然后进入系统, 开始配置网卡
 

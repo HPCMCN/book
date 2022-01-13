@@ -31,5 +31,5 @@ docker -H 10.0.0.11 info
 
 输出如下, 说明连接成功.
 
-![image-20200923212110091](image/05-docket%E9%85%8D%E7%BD%AE/image-20200923212110091.png)
+![image-20200923212110091](.image/02-%E5%BC%80%E5%90%AFapi/image-20200923212110091.png)
 

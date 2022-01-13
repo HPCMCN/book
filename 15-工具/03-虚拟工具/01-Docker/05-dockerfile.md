@@ -192,7 +192,7 @@ EXPOSE 80 80
    docker image ls | grep hpcm
    ```
 
-   ![image-20210804111635864](E:\project\book\07-工具\03-虚拟工具\01-Docker\.img\05-dockerfile\image-20210804111635864.png)
+   ![image-20220113221904226](.image/05-dockerfile/image-20220113221904226.png)
 
 
 
