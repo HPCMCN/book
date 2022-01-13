@@ -75,7 +75,7 @@ umount /mnt/  # 卸载挂载
 ls /mnt/
 ```
 
-![image-20200710231223206](image/01-yum%E6%8D%A2%E6%BA%90/image-20200710231223206.png)
+![image-20200710231223206](.image/01-yum%E6%8D%A2%E6%BA%90/image-20200710231223206.png)
 
 ### 1.2.3 指定yum使用ISO
 
