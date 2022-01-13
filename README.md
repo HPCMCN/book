@@ -1,3 +1,0 @@
-# HPCM
-
-blog by hpcm
