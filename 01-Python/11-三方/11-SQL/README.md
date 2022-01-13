@@ -1,7 +1,0 @@
-# SQL
-
-* pymysql
-* pyredis
-
-
-
