@@ -8,7 +8,7 @@ CSRF(Cross Site Request Forgery), 跨站请求伪造.
 * 在未销毁cookie情况下(一般是未关闭此页面), 用户访问钓鱼服务器
 * 钓鱼服务器会诱导重定向到官方服务器的某个需要的页面. 此时client会携带完整的用户cookie信息, 服务器会认为是合法操作. 导致个人隐私泄露以及财产安全。
 
-![img](01-CSRF.assets/CSRF%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B.png)
+![img](.image/03-csrf/CSRF%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B.png)
 ## 1.2 防范原理
 
 使用CSRF进行防范, 原理:

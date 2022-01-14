@@ -10,17 +10,15 @@
    docker pull delron/elasticsearch-ik:2.4.6-1.0
    ```
 
-2. 获取离线镜像
+2. 获取离线镜像[百度云](https://pan.baidu.com/s/1D5v0gfPhWBgwioQ_kaAc_A): hpcm
 
-   [本地下载](image/05-elasticsearch-%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE/delron_elasticsearch.tar.gz)    [百度云](https://pan.baidu.com/s/1D5v0gfPhWBgwioQ_kaAc_A): hpcm
-   
    ```python
    docker load -i elasticsearch-ik-2.4.6_docker.tar
    ```
 
 ### 1.1.2 运行容器
 
-运行docker前, 需要配置一下elasticsearch的配置文件[下载](image/05-elasticsearch-%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE/config.rar)
+运行docker前, 需要配置一下elasticsearch的配置文件[下载](.image/05-elasticsearch-%E5%AE%8C%E6%95%B4%E9%85%8D%E7%BD%AE/config.rar)
 
 需要将配置文件中`config/dlasticsearch.yml`中, 修改为自己的`ip`
 

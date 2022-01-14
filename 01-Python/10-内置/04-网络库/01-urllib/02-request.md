@@ -89,7 +89,7 @@ http://localhost:8000/www
 
 用于headers中的浏览器型号伪装
 
-[User-Agent.py](image/02-request/User-Agent-list.py)
+[User-Agent.py](.image/02-request/User-Agent-list.py)
 
 ### 1.3.2 < ProxyHandler
 

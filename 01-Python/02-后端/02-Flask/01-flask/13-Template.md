@@ -47,7 +47,7 @@ def render_template(template_name_or_list, **context)
 
 * 渲染结果
 
-  ![image-20200530230313461](13-Template.assets/image-20200530230313461.png)
+  ![image-20200530230313461](.image/13-Template/image-20200530230313461.png)
 
 # 2. 模板语言
 
@@ -114,7 +114,7 @@ def render_template(template_name_or_list, **context)
 
 输出
 
-![image-20200530231917512](13-Template.assets/image-20200530231917512.png)
+![image-20200530231917512](.image/13-Template/image-20200530231917512.png)
 
 ## 2.3 条件判断
 
@@ -142,7 +142,7 @@ def render_template(template_name_or_list, **context)
 
 输出
 
-![image-20200530232309736](13-Template.assets/image-20200530232309736.png)
+![image-20200530232309736](.image/13-Template/image-20200530232309736.png)
 
 ## 2.4 过滤器
 
@@ -286,7 +286,7 @@ aaBBccDD
 
 输出
 
-![image-20200531152213132](13-Template.assets/image-20200531152213132.png)
+![image-20200531152213132](.image/13-Template/image-20200531152213132.png)
 
 
 ### 2.4.2 自定义
@@ -347,7 +347,7 @@ aabbccaa, 11234aa
 
 输出
 
-![image-20200531163853092](13-Template.assets/image-20200531163853092.png)
+![image-20200531163853092](.image/13-Template/image-20200531163853092.png)
 
 ## 2.5 变量
 
@@ -478,7 +478,7 @@ aabbccaa, 11234aa
 
 效果
 
-![image-20200531165313273](13-Template.assets/image-20200531165313273.png)
+![image-20200531165313273](.image/13-Template/image-20200531165313273.png)
 
 
 

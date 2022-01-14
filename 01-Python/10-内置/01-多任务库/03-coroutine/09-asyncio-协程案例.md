@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
 调用IO示例图
 
-![image-20201208085008279](image/05-asyncio-%E5%8D%8F%E7%A8%8B%E6%A1%88%E4%BE%8B/image-20201208085008279.png)
+![image-20201208085008279](.image/09-asyncio-%E5%8D%8F%E7%A8%8B%E6%A1%88%E4%BE%8B/image-20201208085008279.png)
 
 # 2. IO使用
 
