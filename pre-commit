@@ -1,0 +1,268 @@
+#!/c/Python39/python python.exe
+# -*- coding:utf-8 -*-
+# author: HPCM
+# time: 2022/1/11 21:23
+# file: checker.py
+import re
+import os
+import subprocess
+
+suffix = ["png", "jpg", "gz", "bz", "zip", "jpeg", "rpm", "jar", "gif", "rar"]
+value_ignores = [
+    "path.com",
+    "re.com",
+    "iteye.com",
+    "info.us",
+    "db.com",
+    "admin.site",
+    "oracle.com",
+    "snmplabs.com",
+    "management.com",
+    "fontzone.net",
+    "osgeo.cn",
+    "self.net",
+    "obj.com",
+    "session.com",
+    "example.com",
+    "yuntongxun.com",
+    "CommentLike.com",
+    "middleware.com",
+    "mon.Com",
+    "xadmin.site",
+    "mysqld.cn",
+    "views.Com",
+    "validation.Com",
+    "activestate.com",
+    "lt.com",
+    "csdn.net",
+]
+# 包含key的需要跳过
+skip_keys = [
+    "task",
+    "make",
+    "sku_id",
+    "skus",
+    "View",
+    "cart",
+    "Failed",
+    "Error",
+]
+# key对应value中  包含的需要跳过
+skip_values = [
+    "view",
+    "None",
+    "format",
+    "admin",
+    "sku.id",
+    "context",
+    "python",
+    "test",
+    "namespace",
+    "request.user",
+    "resolver",
+    "Backend",
+    "sku_key",
+    "sku_id",
+    "order_by",
+    "url",
+    "all()",
+    "index",
+    "default",
+    "db_table",
+    "bool",
+    "astropy",
+    "value",
+    "reverse",
+    "args",
+    "model",
+    "label",
+    "list",
+    "Authen",
+    "token",
+    "[\"127.0.0.1\"]",
+    "MySQLdb",
+    "port",
+    "router",
+    "auths",
+    "serializers",
+    "View",
+    "10.0.0.12",
+    "self, name):",
+    "attrs",
+    "data.get(\"password\")",
+    "BaseModel",
+    "request.data",
+    "username",
+    "openid",
+    "mobile",
+    "objects",
+    "user,",
+    "self, request):",
+    "payload",
+    "Column",
+    "Model",
+    "manager",
+    
+]
+
+# key相等的需要跳过
+key_ignores = [
+    "author",
+    "_password",
+    "localhost",
+    "db_index",
+    "SKIP",
+    "app_privete_key_path",
+    "alipay_public_key_path",
+    "app_private_key_string",
+    "alipay_public_key_string",
+    "generate_auth_token",
+    "alipay_url",
+    "db_table",
+    "db_constraint",
+    "sku_id",
+    "AUTH_USER_MODEL",
+    "foreign_key_checks",
+    "db_column",
+    "makedirs",
+    "use_url",
+    "get_absolute_url",
+    "KEYWORD_ONLY",
+    "get_host",
+    "_key",
+    "_make_method",
+    "urlconf",
+    "KeyError",
+    "urlconf_module",
+    "ROOT_URLCONF",
+    "STATIC_URL",
+    "waitKey",
+    "get_keys",
+    "sort_keys",
+    "keys",
+    "MakeToken",
+    "Foreignkey",
+    "make",
+    "make_header",
+    "primary_key",
+    "ForeignKey",
+    "make_body",
+    "make_sha_value",
+    "make_response",
+    "url_for",
+    "static_url_path",
+    "add_url_rule",
+    "EMAIL_PORT",
+    "EMAIL_USE_TLS",
+    "urlencode",
+    "PREFERRED_URL_SCHEME",
+    "get_current_url",
+    "url_prefix",
+    "url_defaults",
+    "rpassword",
+    "check_password_hash",
+    "verify_password",
+    "check_password",
+    "image_key",
+    "validate_password",
+    "imageCodeUrl",
+    "EMAIL_BACKEND",
+    
+]
+
+# key对应的值相等的需要跳过
+key_values = [
+    "None",
+    "None):",
+    "True",
+    "= '1234':",
+    "= 'pwd':",
+    "123456",
+    "111111",
+    "False",
+    "KeyError",
+    "password",
+    "self.password",
+    "self.password)",
+    "self.password))",
+    "crypt.decrypt(password)",
+    "self, password)",
+    "None, database=None):",
+    "\"hello_world\"",
+    "hello_world\"",
+    "",
+    "null",
+    "value",
+    "value)",
+    "MYSQL_PASSWORD",
+    "lambda x: x[0]))",
+    "lambda x: x[0])",
+    "path_url",
+    "secret_key",
+    "self):",
+    "self, password):",
+    "data.get(\"email\")",
+    "email",
+    "redis://127.0.0.1/14\"",
+    "xx/oauth_callback.html'",
+    "User.objects.get(mobile=account)",
+]
+
+key_rules = [
+    r"(([\w0-9-_]*secret[\w0-9-_]*)\s*[=:\(]\s*(['\"]?.*['\"]?))",
+    r"(([\w0-9-_]*key[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*ak[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*sk[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*pwd[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*passwd[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*password[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*auth[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*ur[li][\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*token[li][\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*host[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*database[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*db[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*email[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+    r"(([\w0-9-_]*user[\w0-9-_]*)\s*[=:\(]\s*['\"]?(.*)['\"]?)",
+]
+
+value_rules = [r"[a-zA-Z0-9*]{2,}\.(?:com|cn|net|site|git)"]
+result = subprocess.Popen("git config --global core.quotepath false && git diff --cached --name-only --cached",
+                          shell=True, stdout=subprocess.PIPE)
+for file in result.stdout.read().decode().splitlines():
+    subprocess.Popen(f"git add {file}", shell=True, stdout=subprocess.PIPE)
+    if not file or any([file.endswith(s) for s in suffix]) or not os.path.exists(file):
+        continue
+    print(file)
+    try:
+        with open(file, encoding="utf-8") as f:
+            content = f.read()
+    except:
+        with open(file, encoding="gbk") as f:
+            content = f.read()
+    for vr in value_rules:
+        for res in re.findall(vr, content, flags=re.I):
+            print(f"[{file}]checked value: {res}")
+            if len(res) > 3 and "***" not in res and res not in value_ignores:
+                print(f"{file}: {res}")
+                exit("There is value information in this submission. Please process and resubmit!")
+    for kr in key_rules:
+        for res in re.findall(kr, content, flags=re.I):
+            print(f"[{file}]checked key: {res[1]}={res[2]}")
+            if len(res[2]) > 3 and not any([key in res[1] for key in skip_keys]) and not any([key in res[2] for key in skip_values]) and "***" not in res[2] and res[1] not in key_ignores and res[2] not in key_values:
+                msg = f"There is a risk of privacy data disclosure: {res[0]}\n" + \
+                      f"\t{res[1]} = {res[2]}"
+                exit(msg)
+                # if not input("�Ƿ��Զ��滻(Y/N):")[0].upper() == "Y":
+                #     exit("���ֶ�����!")
+                # replace_content = res[0].replace(res[2], f"{res[2][:2]}***{res[2][-2:]}")
+                # if replace_content == res[1]:
+                #     exit("�滻ʧ��!")
+                # content = re.sub(res[0], replace_content, content, flags=re.S)
+
+    # with open(file, "w+") as f:
+    #     f.write(content)
+
+# if not input("�Ƿ�ȷ���ύ����(Y/N):")[0].upper() == "Y":
+#     exit("����ֹ�ύ����!")
+
