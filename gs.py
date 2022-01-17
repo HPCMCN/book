@@ -4,12 +4,16 @@
 # file: gs.py
 import os
 
+blacks = [
+    "SUMMARY.md",
+]
+
 
 def generate_summary(path="."):
     tsm = []
     for p in os.listdir(path):
         sm = {}
-        if p.startswith("."):
+        if p.startswith(".") or p in blacks:
             continue
         sp = os.path.join(path, p)
         if os.path.isdir(sp):
