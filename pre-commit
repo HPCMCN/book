@@ -9,7 +9,7 @@ import sys
 import shutil
 import subprocess
 
-suffix = ["png", "jpg", "gz", "bz", "zip", "jpeg", "rpm", "jar", "gif", "rar"]
+suffix = ["png", "jpg", "gz", "bz", "zip", "jpeg", "rpm", "jar", "gif", "rar", "pre-commit", "gs.py"]
 value_ignores = [
 ]
 
@@ -17,7 +17,8 @@ value_ignores = [
 key_ignores = [
     "author",
 ]
-
+skip_keys = []
+skip_values = []
 # key对应的值相等的需要跳过
 key_values = [
 ]
