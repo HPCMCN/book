@@ -238,3 +238,14 @@ docker image load  -i 加载的tar包镜像
 
    
 
+# 4. 导入container为image
+
+```shell
+docker commit -a "hpcmgm" -m "buildoer" -p 478a6cbf8b1b build_apk:0.1
+```
+
+* a: 创建者
+* m: 备注信息
+* p: 打包时, 暂停container
+* build_apk: 打包后的名字
+* 0.1: 打包后image的版本
