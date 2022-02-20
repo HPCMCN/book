@@ -11,14 +11,23 @@ import subprocess
 
 suffix = ["png", "jpg", "gz", "bz", "zip", "jpeg", "rpm", "jar", "gif", "rar", "pre-commit", "gs.py"]
 value_ignores = [
+    "raw.git",
+    "hubusercontent.com",
+    "trmap.cn",
+    "github.com",
+    "cn.git",
+    
 ]
 
 # key相等的需要跳过
 key_ignores = [
     "author",
 ]
-skip_keys = []
-skip_values = []
+skip_keys = [
+]
+skip_values = [
+"127.0.0.1",
+]
 # key对应的值相等的需要跳过
 key_values = [
 ]
