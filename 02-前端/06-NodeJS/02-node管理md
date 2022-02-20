@@ -2,10 +2,101 @@
 
 版本控制工具
 
+## 1.1 安装
+
+```shell
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+## 1.2 命令
+
+* 安装node
+
+  ```shell
+  nvm install node  # 安装node最新版
+  nvm install 14.7.0 # 安装指定版本node
+  ```
+
+* 列出node版本
+
+  ```shell
+  nvm ls-remote   # 列出可以下载的node版本
+  nvm list        # 列出已经安装的node版本
+  ```
+
+* 使用指定版本node
+
+  ```shell
+  nvm use node/14.7.0            # 使用指定版本的node
+  nvm run node --version         # 查看当前使用的版本
+  nvm alias default 8.1.0        # 将默认node切换为指定版本
+  ```
+
 # 2. nrm
 
 源控制工具
 
+## 2.1 安装
+
+```shell
+npm install -g nrm
+```
+
+## 2.2 命令
+
+* 查看源
+
+  ```shell
+  nrm ls # 查看可以用源
+  ```
+
+* 切换源
+
+  ```shell
+  nrm use taobao
+  ```
+
+* 增加源
+
+  ```shell
+  nrm add registry http://registry.npm.frp.trmap.cn/
+  nrm del http://registry.npm.frp.trmap.cn/
+  nrm test npm # 测试响应时间
+  ```
+
+  
+
 # 3. nodemon
 
 代码监控重启
+
+## 3.1 安装
+
+```shell
+npm install -g nodemon
+```
+
+## 3.2 命令
+
+```js
+{
+    "scripts": {
+        "start": "nodemon src/main.js"
+    }
+}
+```
+
+指定检测文件
+
+```js
+# nodemon.json
+{
+    "watch": ["*/**/.js"],  # 检测全部文件
+    "ignore": []  # 排除文件
+}
+```
+
+
+
+
+
