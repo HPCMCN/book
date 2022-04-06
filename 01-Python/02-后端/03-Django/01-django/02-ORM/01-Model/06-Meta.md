@@ -33,3 +33,5 @@
 #### permissions
 
 #### get_latest_by
+
+#### unique_together
