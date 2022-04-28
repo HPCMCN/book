@@ -288,6 +288,12 @@ return bool
 
 ## 4.3 参数传递
 
+#### - 获取函数名字
+
+```python
+sys._getframe().f_code.co_name
+```
+
 #### - argv
 
 返回一个列表. 表示传递到Python中的所有参数. 
