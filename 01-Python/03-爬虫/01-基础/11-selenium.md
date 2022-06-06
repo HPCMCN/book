@@ -7,7 +7,7 @@
 * 使用chrome驱动[[点击下载配套的chrome以及驱动]](https://pan.baidu.com/s/1FhdKT2N1AybRn2p_jbmIfg)
 
   ```python
-  http://npm.taobao.org/mirrors/chromedriver
+  http://chromedriver.storage.googleapis.com/index.html
   ```
 
 * 使用phantomjs浏览器
