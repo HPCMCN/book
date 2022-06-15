@@ -27,6 +27,35 @@ pip install selenium
 
 # 2. 使用
 
+## 2.1 操作已打开浏览器
+
+* 配置浏览器启动
+
+  选择图标, 将如下代码添加到启动脚本中, 开启浏览器的debug模式
+
+  ```shell
+  "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9527 --user-data-dir="F:\selenium\AutomationProfile"
+  ```
+
+* 调用方式
+
+  ```python
+  from selenium import webdriver
+  from selenium.webdriver.chrome.options import Options
+  
+  webdriver_path = r"E:\chromedriver_win32\chromedriver.exe"
+  host = "127.0.0.1"
+  port = 9530
+      
+  options = Options()
+  options.add_experimental_option("debuggerAddress", f"{host}:{port}")
+  driver = webdriver.Chrome(webdriver_path, options=options)
+  ```
+
+  
+
+## 2.2 常规使用
+
 ```python
 from selenium import webdriver
 # 打开对应的浏览器
