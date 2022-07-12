@@ -50,7 +50,7 @@ docker-compose up --scale web=3 -d  # 批量启动, 也可以批量减少
 2. 运行并配置mysql
 
    ```bash
-   run -d --name mysql -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=r***t -e MYSQL_DATABASE=wordpress mysql
+   docker run -d --name mysql -v mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=r***t -e MYSQL_DATABASE=wordpress mysql
    ```
 
    *注: mysql的具体配置参数参见: https://hub.docker.com/_/mysql/*
