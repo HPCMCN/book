@@ -14,6 +14,12 @@ class UserFilterSet(FilterSet):
 
     depart_name = filters.CharFilter(label="depart_name", method="filter_depart_name")
     depart_name__icontains = filters.CharFilter(label="depart_name", method="filter_depart_name__icontains")
+    
+    role = filters.CharFilter(field_name="user_roles__roles__code")
+
+    role_id = filters.CharFilter(field_name="user_roles__roles__id")
+    role_id__in = filters.BaseInFilter(field_name="user_roles__roles__id", lookup_expr="in")
+
 
     class Meta:
         model = models.Users
