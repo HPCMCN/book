@@ -8,6 +8,7 @@
 
   ```python
   http://chromedriver.storage.googleapis.com/index.html
+  https://chromedriver.chromium.org/downloads
   ```
 
 * 使用phantomjs浏览器

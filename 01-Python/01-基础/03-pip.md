@@ -152,18 +152,18 @@ setup(
     license="Apache License V2",
     package_data={"": ["*.*"]},
     url="#",
-    install_requires=[str(ir.req) for i in parse_requirements("requirements.txt", session=False),
-                      zip_safe=False,
-                      classifiers=[
-                          "Programming Language :: Python",
-                          "Operating System :: Microsoft :: Windows",
-                          "Operating System :: Unix",
-                          "Programming Language :: Python :: 2.7",
-                          "Programming Language :: Python :: 3.4",
-                          "Programming Language :: Python :: 3.5",
-                          "Programming Language :: Python :: 3.6",
-                          "Programming Language :: Python :: 3.7",
-                      ]
+    install_requires=[str(ir.req) for i in parse_requirements("requirements.txt", session=False)],
+    zip_safe=False,
+    classifiers=[
+        "Programming Language :: Python",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: Unix",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+    ]
 )
 ```
 
