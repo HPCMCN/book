@@ -123,7 +123,7 @@ docker container rm id
 ### 7.2.1 批量删除
 
 ```bash
-docker container $(docker container ls -aq)  # 删除全部
-docker container $(docker container ls -qf "status=exited")  # 删除已经退出的ID
+docker container rm -f $(docker container ls -aq)  # 删除全部
+docker container rm -f $(docker container ls -qf "status=exited")  # 删除已经退出的ID
 ```
 

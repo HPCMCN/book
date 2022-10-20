@@ -24,7 +24,7 @@ pip依赖于`setuptools`, `wheel`, 所以需要安装三个包. 官方安装介�
 
   ```python
   curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   # 此版本>=2.7
-  curl https://bootstrap.pypa.io/2.6/get-pip.py  # 此版本<2.7
+  curl https://raw.githubusercontent.com/pypa/get-pip/430ba37776ae2ad89f794c7a43b90dc23bac334c/2.6/get-pip.py # 此版本<2.7
   ```
 
   
