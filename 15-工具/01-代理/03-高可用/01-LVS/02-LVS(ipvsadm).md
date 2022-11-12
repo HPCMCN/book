@@ -1,6 +1,12 @@
 # 1. ipvsadm
 
-## 1.1 常用命令
+## 1.1 安装
+
+```shell
+yum install ipvsadm -y
+```
+
+## 1.2 常用命令
 
 ```bash
 ipvsadm -A -t xxx -s rr
@@ -19,6 +25,8 @@ ipvsadm -a -t xxx -r xxx -m
 # 2. NAT模式
 
 ## 2.1 准备工作
+
+搭建2台内网 + 1 台外网: [跳转](..\..\..\03-虚拟工具\02-VMware\10-NAT网络配置.md) 
 
 ### 2.1.1 内网主机
 
@@ -76,8 +84,6 @@ ipvsadm -a -t xxx -r xxx -m
    ```bash
    nginx -t restart
    ```
-
-
 
 ## 2.3 开始搭建
 
