@@ -37,13 +37,13 @@ docker image pull hub.c.163.com/library/nginx
 
 去生成对应的url, 例如:
 
-![image-20200719233407274](image/02-docker%20image/image-20200719233407274.png)
+![image-20221112123048940](.image/03-docker-image/image-20221112123048940.png)
 
 然后修改或者增加docker配置: `/etc/docker/daemon.json`
 
 ```bash
 {
-"registry-mirrors": ["https://e9yneuy4.mirror.aliyuncs.com"]
+"registry-mirrors": ["https://xxx.mirror.aliyuncs.com"]
 }
 
 ```
@@ -65,7 +65,7 @@ docker image pull hub.c.163.com/library/nginx
 1. docker 登录
 
    ```bash
-   docker login -u username -p password -e "hpcmpc@g***l.com"
+   docker login -u username -p password -e "hp***@gmail.com"
    ```
 
 2. 上传镜像

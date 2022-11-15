@@ -5,14 +5,14 @@
 ipvs是LVS的核心模块
 
 ```shell
-yum install -y ipvs
+yum install -y ipvs ipvsadm
 ```
 
 ## 1.2 配置
 
 ```shell
-vim /etc/modules-load.d/ipvs.conf 
 # 添加如下信息
+vim /etc/modules-load.d/ipvs.conf 
 ip_vs
 ip_vs_lc
 ip_vs_wlc
@@ -56,7 +56,9 @@ yum install haproxy -y
 
 ```shell
 mkdir /etc/haproxy
-vim /etc/haproxy/haproxy.cfg # 覆盖内容
+# 覆盖内容
+echo > /etc/haproxy/haproxy.cfg 
+vim /etc/haproxy/haproxy.cfg
 global
   maxconn  2000
   ulimit-n  16384
@@ -112,6 +114,9 @@ yum install -y keepalived
 # 分别修改/etc/keepalived/keepalived.conf文件
 
 # master01
+echo > /etc/keepalived/keepalived.conf
+vim /etc/keepalived/keepalived.conf
+
 ! Configuration File for keepalived
 global_defs {
     router_id LVS_DEVEL
@@ -145,6 +150,9 @@ vrrp_instance VI_1 {
 }
 
 #master02
+echo > /etc/keepalived/keepalived.conf
+vim /etc/keepalived/keepalived.conf
+
 ! Configuration File for keepalived
 global_defs {
     router_id LVS_DEVEL
@@ -177,8 +185,10 @@ vrrp_instance VI_1 {
     }
 }
 
-
 #master03
+echo > /etc/keepalived/keepalived.conf
+vim /etc/keepalived/keepalived.conf
+
 ! Configuration File for keepalived
 global_defs {
     router_id LVS_DEVEL
@@ -216,9 +226,7 @@ vrrp_instance VI_1 {
 
 ```shell
 vim /etc/keepalived/check_apiserver.sh # 配置如下信息
-
 #!/bin/bash
-
 err=0
 for k in $(seq 1 3)
 do
@@ -250,13 +258,13 @@ fi
 chmod +x /etc/keepalived/check_apiserver.sh
 
 systemctl daemon-reload
-systemctl enable --now haproxy && systemctl haproxy start
-systemctl enable --now keepalived && systemctl keepalived start
+systemctl enable --now haproxy && systemctl start  haproxy 
+systemctl enable --now keepalived && systemctl start keepalived 
 ```
 
 ## 4.1 测试
 
 ```shell
  ping 10.111.0.111 -c 4
- telnet 10.111.0.111 16443  # telnet不同, 认为vip未设置成功
+ telnet 10.111.0.111 16443  # telnet不通, 认为vip未设置成功
 ```
