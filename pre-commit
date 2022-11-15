@@ -24,6 +24,7 @@ key_ignores = [
     "author",
 ]
 skip_keys = [
+    "flask",
 ]
 skip_values = [
 "127.0.0.1",
