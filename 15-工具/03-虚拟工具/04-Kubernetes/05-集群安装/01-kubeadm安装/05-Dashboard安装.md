@@ -1,8 +1,8 @@
 * 配置文件
 
-  [dashboard-user.yaml](.image/09-Dashboard%E5%AE%89%E8%A3%85/dashboard-user.yaml)
+  [dashboard-user.yaml](../../.image/09-Dashboard%E5%AE%89%E8%A3%85/dashboard-user.yaml)
 
-  [dashboard.yaml](.image/09-Dashboard%E5%AE%89%E8%A3%85/dashboard.yaml)
+  [dashboard.yaml](../../.image/09-Dashboard%E5%AE%89%E8%A3%85/dashboard.yaml)
 
 * 安装指定版本
 
@@ -16,7 +16,7 @@
   kubectl get svc -n kubernetes-dashboard
   ```
 
-  ![image-20221115181233519](.image/09-Dashboard%E5%AE%89%E8%A3%85/image-20221115181233519.png)
+  ![image-20221115181233519](../../.image/09-Dashboard%E5%AE%89%E8%A3%85/image-20221115181233519.png)
 
 * 查看登录密码
 
@@ -31,7 +31,7 @@
   --test-type --ignore-certificate-errors
   ```
 
-  ![image-20221115181515218](.image/09-Dashboard%E5%AE%89%E8%A3%85/image-20221115181515218.png)
+  ![image-20221115181515218](../../.image/09-Dashboard%E5%AE%89%E8%A3%85/image-20221115181515218.png)
 
 * 查看网站
 
@@ -40,4 +40,4 @@
   # https://10.111.0.20:31499/
   ```
 
-  ![image-20221115181845796](.image/09-Dashboard%E5%AE%89%E8%A3%85/image-20221115181845796.png)
+  ![image-20221115181845796](../../.image/09-Dashboard%E5%AE%89%E8%A3%85/image-20221115181845796.png)

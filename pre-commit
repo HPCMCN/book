@@ -14,8 +14,20 @@ value_ignores = [
     "raw.git",
     "hubusercontent.com",
     "trmap.cn",
+    "mirrors.aliyun.com",
     "github.com",
     "cn.git",
+    "net.net",
+    "docker.com",
+    "aliyuncs.com",
+    "aliyun.com",
+    "Specs.Com",
+    "registry.cn",
+    "baidu.com",
+    "wlnmp.com",
+    "gitee.com",
+    "kubernetes.git",
+    "goproxy.cn",
     
 ]
 
@@ -25,9 +37,30 @@ key_ignores = [
 ]
 skip_keys = [
     "flask",
+    "max_user_watches",
+    "configMapKeyRef",
+    "key",
+    "securityContext",
+    "healthHost",
+    "hostNetwork",
+    "host",
+    "insecureSkipTLSVerify",
+    "--requestheader-username-headers",
+    "runAsUser",
+    "secret",
+    "Host",
 ]
 skip_values = [
 "127.0.0.1",
+"nginx.org",
+"docker",
+"description",
+"CriticalAddonsOnly",
+"calico_backend",
+"cni_network_config",
+"veth_mtu",
+"mirrors.aliyun.com/",
+"aliyuncs.com",
 ]
 # key对应的值相等的需要跳过
 key_values = [

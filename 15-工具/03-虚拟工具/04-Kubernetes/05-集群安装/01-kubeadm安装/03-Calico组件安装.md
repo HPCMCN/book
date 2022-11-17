@@ -2,7 +2,7 @@
 
 只需要在**master01**上面执行即可
 
-* [配置文件](.image/07-Calico%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/calico.yaml)
+* [配置文件](../../.image/07-Calico%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/calico.yaml)
 
 * 修改配置
 
@@ -27,7 +27,7 @@
   kubectl get po -n kube-system
   ```
 
-  ![image-20221115173839484](.image/07-Calico%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/image-20221115173839484.png)
+  ![image-20221115173839484](../../.image/07-Calico%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/image-20221115173839484.png)
 
 * 查看当前各节点状态
 
@@ -36,4 +36,4 @@
   # 已经Ready了
   ```
 
-  ![image-20221115174052079](.image/07-Calico%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/image-20221115174052079.png)
+  ![image-20221115174052079](../../.image/07-Calico%E7%BB%84%E4%BB%B6%E5%AE%89%E8%A3%85/image-20221115174052079.png)
