@@ -1,10 +1,17 @@
-* 生成环境
+# 1. 配置文件
+
+## 1.1 构建配置信息
+
+* 创建服务
 
   ```shell
   kubectl -n kube-system create serviceaccount kube-proxy
-  
-  kubectl create clusterrolebinding system:kube-proxy         --clusterrole system:node-proxier         --serviceaccount kube-system:kube-proxy
-  
+  kubectl create clusterrolebinding system:kube-proxy   --clusterrole system:node-proxier         --serviceaccount kube-system:kube-proxy
+  ```
+
+* 将证书导入配置
+
+  ```shell
   SECRET=$(kubectl -n kube-system get sa/kube-proxy \
       --output=jsonpath='{.secrets[0].name}')
   
@@ -24,6 +31,8 @@
   kubectl config use-context kubernetes     --kubeconfig=/etc/kubernetes/kube-proxy.kubeconfig
   ```
 
+## 1.2 同步
+
 * 将配置发送到其他节点
 
   ```shell
@@ -40,12 +49,10 @@
   
   ```
 
-* 配置启动文件
+* 全部节点
 
   ```shell
-  vim /usr/lib/systemd/system/kube-proxy.service
-  
-  
+  # /usr/lib/systemd/system/kube-proxy.service
   [Unit]
   Description=Kubernetes Kube Proxy
   Documentation=https://github.com/kubernetes/kubernetes
@@ -63,13 +70,11 @@
   WantedBy=multi-user.target
   
   ```
-
+  
 * 配置yaml文件
 
   ```shell
-  vim /etc/kubernetes/kube-proxy.yaml
-  
-  
+  # /etc/kubernetes/kube-proxy.yaml
   apiVersion: kubeproxy.config.k8s.io/v1alpha1
   bindAddress: 0.0.0.0
   clientConnection:
@@ -107,6 +112,8 @@
   portRange: ""
   udpIdleTimeout: 250ms
   ```
+
+# 2. 启动
 
 * 启动组建
 

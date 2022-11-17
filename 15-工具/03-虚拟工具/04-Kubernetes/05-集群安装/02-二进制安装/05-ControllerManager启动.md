@@ -1,10 +1,9 @@
-* 配置
+# 1. 配置文件
 
-  全部master节点配置
+* 全部master节点配置
 
   ```shell
-  vim /usr/lib/systemd/system/kube-controller-manager.service
-  
+# /usr/lib/systemd/system/kube-controller-manager.service
   [Unit]
   Description=Kubernetes Controller Manager
   Documentation=https://github.com/kubernetes/kubernetes
@@ -36,8 +35,9 @@
   
   [Install]
   WantedBy=multi-user.target
-  
   ```
+
+# 2. 启动服务
 
 * 启动服务
 
@@ -45,6 +45,7 @@
   systemctl daemon-reload
   systemctl enable --now kube-controller-manager
   ```
+  
 * 检查验证
 
   ```shell

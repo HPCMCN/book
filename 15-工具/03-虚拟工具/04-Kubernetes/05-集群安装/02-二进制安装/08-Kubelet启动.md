@@ -1,4 +1,8 @@
+# 1. 配置文件
+
 全部节点都执行
+
+## 1.1 启动配置
 
 * 配置kubelet.service
 
@@ -21,13 +25,16 @@
   WantedBy=multi-user.target
   ```
 
-* 配置kubelet配置信息
+## 1.2 配置文件
+
+所有节点, 二选一即可
+
+### 1.2.1 主配置文件
+
+* Runtime为Containerd
 
   ```shell
-  # 所有节点
-  vim /etc/systemd/system/kubelet.service.d/10-kubelet.conf
-  
-  
+  # /etc/systemd/system/kubelet.service.d/10-kubelet.conf
   # 注意: Runtime为Containerd 的配置
   [Service]
   Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.kubeconfig --kubeconfig=/etc/kubernetes/admin.kubeconfig"
@@ -36,8 +43,12 @@
   Environment="KUBELET_EXTRA_ARGS=--node-labels=node.kubernetes.io/node='' "
   ExecStart=
   ExecStart=/usr/local/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_SYSTEM_ARGS $KUBELET_EXTRA_ARGS
+  ```
   
-  
+* Runtime为Docker
+
+  ```shell
+  # /etc/systemd/system/kubelet.service.d/10-kubelet.conf
   # 注意: Runtime为Docker 的配置
   [Service]
   Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.kubeconfig --kubeconfig=/etc/kubernetes/admin.kubeconfig"
@@ -48,12 +59,13 @@
   ExecStart=/usr/local/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_CONFIG_ARGS $KUBELET_SYSTEM_ARGS $KUBELET_EXTRA_ARGS
   ```
 
-* 创建kubelet的启动文件
+### 1.2.2 二级配置文件
+
+* 启动加载配置文件
 
   ```shell
-  vim /etc/kubernetes/kubelet-conf.yml
-  # 注意DNS的ip为Server网段的第十个ip
-  
+  # /etc/kubernetes/kubelet-conf.yml
+  # 注意clusterDNS的ip为Server网段的第十个ip
   apiVersion: kubelet.config.k8s.io/v1beta1
   kind: KubeletConfiguration
   address: 0.0.0.0
@@ -126,15 +138,21 @@
   volumeStatsAggPeriod: 1m0s
   ```
 
+# 2. 启动
+
 * 启动服务
 
   ```shell
   systemctl daemon-reload
   systemctl enable --now kubelet
+  ```
   
+* 检查测试
+
+  ```shell
   systemctl status kubelet
+  
   kubectl get node
   tail -f /var/log/messages
-  
   # 这里会提示CNI not initalezed和not Read问题
   ```

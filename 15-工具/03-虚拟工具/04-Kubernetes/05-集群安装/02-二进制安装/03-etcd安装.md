@@ -1,10 +1,11 @@
-#### 配置etcd配置
+# 1. 配置文件
+
+## 1.1 etcd配置
 
 * master01
 
   ```shell
-  vim /etc/etcd/etcd.config.yml
-  
+  #/etc/etcd/etcd.config.yml
   name: 'master01'  # 这里需要修改
   data-dir: /var/lib/etcd
   wal-dir: /var/lib/etcd/wal
@@ -51,14 +52,12 @@
   log-package-levels:
   log-outputs: [default]
   force-new-cluster: false
-  
   ```
 
 * master02
 
   ```shell
-  vim /etc/etcd/etcd.config.yml
-  
+  #/etc/etcd/etcd.config.yml
   name: 'master02'  # 这里需要修改
   data-dir: /var/lib/etcd
   wal-dir: /var/lib/etcd/wal
@@ -105,14 +104,12 @@
   log-package-levels:
   log-outputs: [default]
   force-new-cluster: false
-  
   ```
 
 * master03
 
   ```shell
-  vim /etc/etcd/etcd.config.yml
-  
+  /etc/etcd/etcd.config.yml
   name: 'master03'  # 这里需要修改
   data-dir: /var/lib/etcd
   wal-dir: /var/lib/etcd/wal
@@ -159,18 +156,14 @@
   log-package-levels:
   log-outputs: [default]
   force-new-cluster: false
-  
   ```
 
-#### 创建service
+## 1.2 启动文件
 
-所有master节点上执行
-
-* 创建启动服务
+* 所有master节点上执行
 
   ```shell
-  vim /usr/lib/systemd/system/etcd.service
-  
+  # /usr/lib/systemd/system/etcd.service
   [Unit]
   Description=Etcd Service
   Documentation=https://coreos.com/etcd/docs/latest/
@@ -188,6 +181,10 @@
   Alias=etcd3.service
   ```
 
+# 2. 启动服务
+
+## 2.1 启动
+
 * 创建证书目录
 
   ```shell
@@ -201,14 +198,22 @@
   systemctl daemon-reload
   systemctl enable --now etcd
   ```
-  
-* 查看状态
+
+## 2.2 查看状态
+
+* 状态检测
 
   ```shell
   export ETCDCTL_API=3
   etcdctl --endpoints="10.111.0.10:2379,10.111.0.11:2379,10.111.0.12:2379" --cacert=/etc/kubernetes/pki/etcd/etcd-ca.pem --cert=/etc/kubernetes/pki/etcd/etcd.pem --key=/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out=table
-  
+  ```
+
+* 服务检测
+
+  ```shell
   systemctl status etcd -l    # 不要出现E开头的错误
   tail -f /var/log/messages
   ```
+
+  
 

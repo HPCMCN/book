@@ -1,3 +1,5 @@
+# 1. 配置文件
+
 自动为各个node的keepalived/haproxy节点生成证书, 自动向apiserver申请证书, 颁发证书, 管理证书
 
 单个master01节点执行, 然后发送到其他节点
@@ -25,13 +27,6 @@
   kubectl config use-context tls-bootstrap-token-user@kubernetes     --kubeconfig=/etc/kubernetes/bootstrap-kubelet.kubeconfig
   ```
 
-* 配置文件
-
-  ```shell
-  mkdir -p /root/.kube ; cp /etc/kubernetes/admin.kubeconfig /root/.kube/config
-  mkdir -p /var/lib/kubelet /var/log/kubernetes /etc/systemd/system/kubelet.service.d /etc/kubernetes/manifests/
-  ```
-  
 * 修改配置
 
   ```shell
@@ -127,21 +122,35 @@
   
   ```
 
+# 2. 安装TLS
+
+## 2.1 环境配置
+
+本部分需要全部节点执行
+
+* kubectl环境变量
+
+  ```shell
+  mkdir -p /root/.kube ; cp /etc/kubernetes/admin.kubeconfig /root/.kube/config
+  ```
+
+* 其他与生成文件夹
+
+  ```shell
+  mkdir -p /var/lib/kubelet /var/log/kubernetes /etc/systemd/system/kubelet.service.d /etc/kubernetes/manifests/
+  ```
+
+## 2.2 构建服务
+
 * 开始创建
 
+  master01节点创建
+  
   ```shell
   kubectl create -f bootstrap.secret.yaml 
   ```
   
-* 测试
-
-  ```shell
-  kubectl get cs
-  
-  tail -f /var/log/messages
-  ```
-
-* 将证书发送到其他节点
+* 将生成好的配置发送到其他节点
 
   ```shell
   cd /etc/kubernetes/
@@ -152,6 +161,14 @@
          scp -r /etc/kubernetes/$FILE $NODE:/etc/kubernetes/${FILE}
        done
   done
+  ```
+
+* 全部测试
+
+  ```shell
+  kubectl get cs
+  
+  tail -f /var/log/messages
   ```
 
   

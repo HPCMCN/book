@@ -1,9 +1,9 @@
-* 配置文件
+# 1. 配置文件
 
-  所有master节点都要配置
+* 所有master节点都要配置
 
   ```shell
-  vim /usr/lib/systemd/system/kube-scheduler.service
+vim /usr/lib/systemd/system/kube-scheduler.service
   
   [Unit]
   Description=Kubernetes Scheduler
@@ -25,12 +25,15 @@
   WantedBy=multi-user.target
   ```
 
+# 2. 启动服务
+
 * 启动服务
 
   ```shell
   systemctl daemon-reload
   systemctl enable --now kube-scheduler
   ```
+  
 * 检查测试
 
   ```shell

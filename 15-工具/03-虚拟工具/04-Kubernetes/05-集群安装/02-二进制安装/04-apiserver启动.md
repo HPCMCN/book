@@ -1,17 +1,14 @@
-* 全部节点创建如下目录
+# [高可用部署](..\..\..\..\01-代理\03-高可用\01-LVS\02-高可用安装.md) 
 
-  ```shell
-  mkdir -p /etc/kubernetes/manifests/ /etc/systemd/system/kubelet.service.d /var/lib/kubelet /var/log/kubernetes
-  ```
-  
-  
-  
+# 1. 配置文件
+
+注意: 一定要确保配置文件中的证书存在
+
 * master01
 
   ```shell
-  vim /usr/lib/systemd/system/kube-apiserver.service 
   # 注意service-cluster-ip-range=10.0.0.0/12   是server 网段
-  
+  # /usr/lib/systemd/system/kube-apiserver.service 
   [Unit]
   Description=Kubernetes API Server
   Documentation=https://github.com/kubernetes/kubernetes
@@ -59,17 +56,15 @@
   
   [Install]
   WantedBy=multi-user.target
-  
   ```
-
+  
   
 
 * master02
 
   ```shell
-  vim /usr/lib/systemd/system/kube-apiserver.service 
+  # /usr/lib/systemd/system/kube-apiserver.service 
   # 注意service-cluster-ip-range=10.0.0.0/12   是server 网段
-  
   [Unit]
   Description=Kubernetes API Server
   Documentation=https://github.com/kubernetes/kubernetes
@@ -117,15 +112,13 @@
   
   [Install]
   WantedBy=multi-user.target
-  
   ```
-
+  
 * master03
 
   ```shell
-  vim /usr/lib/systemd/system/kube-apiserver.service 
+  # /usr/lib/systemd/system/kube-apiserver.service 
   # 注意service-cluster-ip-range=10.0.0.0/12   是server 网段
-  
   [Unit]
   Description=Kubernetes API Server
   Documentation=https://github.com/kubernetes/kubernetes
@@ -173,10 +166,15 @@
   
   [Install]
   WantedBy=multi-user.target
-  
   ```
 
-  
+# 2. 启动服务
+
+* 全部节点创建
+
+  ```shell
+  mkdir -p /etc/kubernetes/manifests/ /etc/systemd/system/kubelet.service.d /var/lib/kubelet /var/log/kubernetes
+  ```
 
 * 启动服务
 
