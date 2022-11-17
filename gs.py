@@ -33,7 +33,7 @@ def generate_summary(path="."):
 
 def write_summary(tsm, idt=0):
     smc = ""
-    for ms in sorted(tsm, key=lambda x: str(int(not x["son"])) or x["name"]):
+    for ms in sorted(tsm, key=lambda x: x["name"]):
         smc += " " * idt * 2 + f"* [{ms['name']}]({ms['value']})\n"
         if ms["son"]:
             smc += write_summary(ms["son"], idt + 1)
