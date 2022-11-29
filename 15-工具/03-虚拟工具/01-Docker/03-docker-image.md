@@ -14,6 +14,17 @@ docker image [选项] [ID/镜像名[:版本号]]
 
 ## 1.1 镜像下载
 
+完整镜像源地址通常包含四个部分
+
+```shell
+docker.io/library/nginx:latest
+```
+
+* 镜像地址registry: `docker.io`/`registry.cn-hangzhou.aliyuncs.com`...
+* 仓库地址repository: `library`/`google_containers`...
+* 镜像名称name: `nginx`/`centos`..
+* 版本号version: `latest`/`1.20`...
+
 ### 1.1.1 官方拉取
 
 ```bash

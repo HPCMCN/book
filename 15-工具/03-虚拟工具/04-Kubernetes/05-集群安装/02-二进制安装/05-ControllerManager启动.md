@@ -3,12 +3,12 @@
 * 全部master节点配置
 
   ```shell
-# /usr/lib/systemd/system/kube-controller-manager.service
+  # /usr/lib/systemd/system/kube-controller-manager.service
   [Unit]
   Description=Kubernetes Controller Manager
   Documentation=https://github.com/kubernetes/kubernetes
   After=network.target
-  
+
   [Service]
   ExecStart=/usr/local/bin/kube-controller-manager \
         --v=2 \
@@ -32,10 +32,11 @@
         
   Restart=always
   RestartSec=10s
-  
+
   [Install]
-  WantedBy=multi-user.target
+  WantedBy=multi-user.target  
   ```
+
 
 # 2. 启动服务
 
@@ -45,7 +46,7 @@
   systemctl daemon-reload
   systemctl enable --now kube-controller-manager
   ```
-  
+
 * 检查验证
 
   ```shell

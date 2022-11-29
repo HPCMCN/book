@@ -171,4 +171,66 @@
   tail -f /var/log/messages
   ```
 
-  
+
+# 3. 介绍
+
+kubelet启动过程
+
+* kubelet 启动, 并检查`/etc/kubernetes/admin.kubeconfig`, 如果没有这个文件, 会
+
+  以下为 TLS初始化流程
+
+  * 读取`/etc/kubernetes/bootstrap.kubeconfig`, 检索apiserver的url和token信息, 
+
+  * kubelet使用此token连接apiserver
+
+  * apiserver根据token信息, 创建出对应的权限
+
+    * token-id为token值
+
+    * 隶属于system:bootstrappers组
+
+      ```shell
+      kubectl get secret -n kube-system bootstrap-token-c8ad9c -oyaml | grep "auth-extra-groups" | awk  'BEGIN{FS=": "} {print $2}' | base64 --decode
+      ```
+
+    * 构建可申请的CSR权限, 用于
+
+      * clusterrole整个集群的权限
+      * clusterrolebinding集群绑定权限, 用于某个clusterrole绑定到某个用户, 集群, serviceaccount
+
+      ```shell
+      kubectl get clusterrole
+      kubectl get clusterrole system:node-bootstrapper -oyaml 
+      # 归属于: certificates.k8s.io 组
+      kubectl get clusterrolebinding kubelet-bootstrap -oyaml
+      # 绑定: system:bootstrappers:default-node-token 组, 和system:bootstrappers里面配置的组是一致的
+      ```
+
+  * kubelet为自己申请注册了一个CSR, 名称`kubernetes.io/kube-apiserver-client-kubelet`, CSR的证书申请方式:
+
+    * k8s管理员手动颁发
+
+    * 如果配置权限, kube-contraoller-manager中CSRApprovingController, 会校验CSR中的username和group是否具有创建CSR的权限, 并且是否归属`kubernetes.io/kube-apiserver-client-kubelet`, 如果通过则自动同意和颁发证书
+
+      ```shell
+      # 查看绑定ClusterRole
+      kubectl get clusterrolebinding node-autoapprove-bootstrap -oyaml
+      # 查看对应的权限
+      kubectl get ClusterRole system:certificates.k8s.io:certificatesigningrequests:nodeclient -oyaml
+      ```
+
+  * kube-contraoller-manager更新证书至CSR的status字段
+  * kubelet从apiserver中获取证书
+  * kubelet根据key和证书, 创建`/etc/kubernetes/admin.kubeconfig`文件
+  * [可选] 如果配置了自动续期, 会根据`/etc/kubernetes/admin.kubeconfig`重新进行续签新的证书
+
+* 检索此文件中的ApiServer的url和证书信息
+
+  ```shell
+  # 查看当前证书有效期
+  grep "certificate-authority-data" /etc/kubernetes/admin.kubeconfig | awk  'BEGIN{FS=": "} {print $2}' | base64 --decode | openssl x509 -noout -dates
+  ```
+
+* 然后使用这个证书和apiserver进行交互
+
