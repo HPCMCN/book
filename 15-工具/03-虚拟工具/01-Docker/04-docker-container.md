@@ -30,7 +30,6 @@ docker container run [选项] 镜像名称
 * -e: 添加环境变量, 可以多次调用. 格式`-e PYTHON=/bin/bash/python`
 * --name: 给容器命名
 * --network=host: 将主机网络环境映射到主机中
-* 
 
 ## 2.1 实例
 
@@ -105,8 +104,6 @@ docker container stop id
 ```bash
 docker container start id
 ```
-
-
 
 # 7. rm
 

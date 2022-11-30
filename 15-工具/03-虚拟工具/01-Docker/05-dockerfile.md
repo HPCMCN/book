@@ -74,14 +74,14 @@ WORKDIR /test
 
 ```bash
 ADD [--chown=<user>:<group>] <src>... <dest>
-ADD [--chown=<user>:<group>] ["<src>",... "<dest>"]
+COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
 ```
 
 实例
 
 ```dockerfile
 ADD --chown=55:mygroup files* /somedir/
-ADD hello /
+COPY hello /
 ```
 
 ## 2.6 ENV
@@ -116,7 +116,7 @@ rm -rf /var/lib/apt/lists/*
 EXPOSE 80 80
 ```
 
-## 3. Dockerfile优化
+# 3. Dockerfile优化
 
 ## 3.1 多阶段构建镜像
 
@@ -146,7 +146,7 @@ EXPOSE 80 80
 3. 构建镜像
 
    ```shell
-   docker build -t hpcm1:test1 .
+   docker build -t hpcm1:test1 -f ./Dockerfile
    ```
 
 4. 查看镜像大小
@@ -154,8 +154,6 @@ EXPOSE 80 80
    ```shell
    docker image ls | grep hpcm
    ```
-
-   
 
 5. 多阶段构建
 
@@ -194,5 +192,47 @@ EXPOSE 80 80
 
    ![image-20220113221904226](.image/05-dockerfile/image-20220113221904226.png)
 
+## 3.1 常用Dockerfile
 
+* Python
 
+  ```shell
+  FROM python:3.7 as pyenv
+  
+  LABEL maintailer="hpcm@foxmail.com"
+  LABEL version="1.0"
+  LABEL description="Python 3.7 virtualenvs"
+  
+  ENV APP_HOME /app
+  ENV PY_ENV_NAME test
+  ENV PY_MIRROR https://mirrors.aliyun.com/pypi/simple
+  
+  RUN useradd -d $APP_HOME -ms /bin/bash app
+  WORKDIR $APP_HOME
+  COPY ./ $APP_HOME
+  
+  RUN pip install virtualenv virtualenvwrapper -i $PY_MIRROR
+  
+  # Set Python Virtualenv
+  RUN /bin/bash -c "echo 'export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python' > /etc/profile"
+  RUN /bin/bash -c "echo 'export WORKON_HOME=$HOME/.virtualenvs' > /etc/profile"
+  RUN /bin/bash -c "echo 'source /usr/local/bin/virtualenvwrapper.sh' > /etc/profile"
+  
+  RUN chown app:app -R ${APP_HOME}
+  RUN chmod +x ${APP_HOME}/py_env
+  USER app
+  
+  FROM pyenv
+  RUN ${APP_HOME}/py_env
+  
+  # file: py_env
+  #!/bin/bash
+  echo "source /etc/profile" > $HOME/.bashrc
+  source /etc/profile
+  
+  mkvirtualenv -p python $PY_ENV_NAME
+  
+  pip install -r /app/requirements.txt -i $PY_MIRROR
+  ```
+
+  
