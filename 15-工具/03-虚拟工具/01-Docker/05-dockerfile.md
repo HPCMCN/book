@@ -2,6 +2,15 @@
 
 用于镜像的制作
 
+## 1.1 镜像编译
+
+```shell
+docker build xxx
+```
+
+* -f: 编译文件名称, 默认Dockerfile
+* -t: 指定镜像名称
+
 # 2. 语法
 
 ## 2.1 FROM
@@ -28,8 +37,8 @@ LABEL description="This is description"  # 描述信息
 用于`shell`的命令运行
 
 * RUN, 镜像编译时执行
-* ENTRYPOINT, container运行开始时执行
 * CMD, container运行后执行, 此参数可以作为ENTRYPOINT的变量
+* ENTRYPOINT, container真正启动时执行
 
 示例一
 
@@ -57,8 +66,6 @@ CMD ["/bin/echo", "hello docker"]
 ENTRYPOINT ["/bin/echo", "hello docker"]
 ```
 
-
-
 ## 2.4 WORKDIR
 
 切换工作目录
@@ -71,6 +78,10 @@ WORKDIR /test
 ## 2.5 ADD/COPY
 
 将本地文件copy到docker镜像中去. 两者语法基本相似
+
+ADD会解压`tar.gz`压缩包
+
+COPY文件夹`b`到镜像里面将会变成`/a/xxx`, 而ADD则是`/a/b/xxx`
 
 ```bash
 ADD [--chown=<user>:<group>] <src>... <dest>
@@ -115,6 +126,17 @@ rm -rf /var/lib/apt/lists/*
 ```dockerfile
 EXPOSE 80 80
 ```
+
+## 2.8 ARG
+
+镜像编译时, 传递参数进来
+
+```shell
+ARG a=1
+# 如果--build-arg=a=3, 那么dockerfile变量a则为3
+```
+
+
 
 # 3. Dockerfile优化
 
@@ -174,10 +196,9 @@ EXPOSE 80 80
    
    WORKDIR /opt
    
-   
    RUN chmod +x ./test/test && ./test/test
    ```
-
+   
 6. 重新构建
 
    ```shell
@@ -197,7 +218,7 @@ EXPOSE 80 80
 * Python
 
   ```shell
-  FROM python:3.7 as pyenv
+  FROM python:3.7
   
   LABEL maintailer="hpcm@foxmail.com"
   LABEL version="1.0"
@@ -222,7 +243,6 @@ EXPOSE 80 80
   RUN chmod +x ${APP_HOME}/py_env
   USER app
   
-  FROM pyenv
   RUN ${APP_HOME}/py_env
   
   # file: py_env

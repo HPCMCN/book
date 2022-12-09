@@ -1,20 +1,56 @@
-#### 1. Master
+# K8s集群
 
-用来管理和控制整个集群的各节点. 包含如下服务:
+![image-20221130175819623](.image/README/image-20221130175819623.png)
 
-* Kubernetes API Server(kube-apiserver): 提供HTTP Rest接口的关键服务进程, 用来对资源进行CRUD的唯一入口, 也是集群的控制入口进程.
-* kubernetes Controller Manager(kube-controller-manager): 提供资源对象的自动化控制中心.
-* Kubernetes Scheduler(kube-scheduler): 负责资源调度(Pod)的进程.
+* Etcd
+  * Node >= 3, 必须奇数个
+  * 独立SSD磁盘
+* Master
+  * Node >= 3
+  * 8C 32G  支撑 200个node, 最少2C 4G
+* Node
+  * Node若干
+  * 最少2C 4G
 
-#### 2. Node
+## Master
 
-除了Master节点, 其他节点都被称为Node节点, 可以是物理机, ECS, 虚拟机的等. 包含如下服务:
+* api server
+  * 无状态的
+  * 与etcd通讯
+  * 集群管理入口, 提供数据交换功能, 遵循REST API接口规范
+* scheduler
+  * 有状态的, 集群环境中, 只有一个master中生效
+  * 通过与apiserver通讯, 监听pod的状态
+  * 然后通过调度算法, 将pod分配到最佳node上
+* controller manager
+  * 有状态的, 集群环境中, 只有一个master中生效
+  * 通过与apiserver通讯, 监听pod的状态
+  * 然后保证Pod达到期望的数量, 或者进行故障恢复
 
-* kubelet: 负责Pod的创建, 启停等任务, 并且与Master协作, 实现集群管理功能. (新节点的注册等)
-* kube-proxy: 实现Service的通信与负载均衡的重要组建
-* Docker Engine(docker): 负责容器创建和管理工作.
+## Node
 
-#### 3. Pod
+* kubelet
+  * 和master节点**协作**, 与apiserver通讯
+  * 负责上报健康检查和监控, 由apiserver写入etcd中
+* kube-proxy
+  * 负责各个pod流量分发
+* Runtime
+  * 负责容器管理
+* CoreDNS
+  * 负责k8s整个集群的DNS解析
+* Calico
+  * 符合CNI标准的网络插件
+  * 给每个Pod分配一个不会重复的IP地址, 并且把每个节点当做一个路由器
+
+## Etcd
+
+数据库
+
+
+
+# 2. 术语简介
+
+## 2.1. Pod
 
 Pod是由Pause和多个业务container构成的资源组.
 
