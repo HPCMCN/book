@@ -28,4 +28,8 @@
 
   * 与deploy相比, 可以部署有状态且有序启动的服务
 
-* DaemonSet(ds)
+* DaemonSet
+
+  守护进程集, 简称ds
+
+  * 与deploy相比, 会自动获取到每个node, 并在每个node上部署服务
