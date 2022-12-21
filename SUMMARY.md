@@ -707,6 +707,8 @@
         * [04-Label](./15-工具/03-虚拟工具/04-Kubernetes/07-K8s组件/04-Label.md)
         * [05-Ingress](./15-工具/03-虚拟工具/04-Kubernetes/07-K8s组件/05-Ingress.md)
       * [08-kubectl命令](./15-工具/03-虚拟工具/04-Kubernetes/08-kubectl命令.md)
+      * [09-配置文件](./15-工具/03-虚拟工具/04-Kubernetes/09-配置文件.md)
+      * [10-磁盘挂载](./15-工具/03-虚拟工具/04-Kubernetes/10-磁盘挂载.md)
     * [10-Vagrant](./15-工具/03-虚拟工具/10-Vagrant/README.md)
       * [03-Vagrantfile](./15-工具/03-虚拟工具/10-Vagrant/03-Vagrantfile.md)
       * [05-网络映射](./15-工具/03-虚拟工具/10-Vagrant/05-网络映射.md)
