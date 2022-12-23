@@ -1,20 +1,6 @@
 # 1. ConfigMap
 
-## 1.1 介绍
-
-* 常规配置
-
-  ![image-20221221103849249](.image/09-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-20221221103849249.png)
-
-* 云原生配置分离
-
-  ![image-20221221103955769](.image/09-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-20221221103955769.png)
-
-* ConfigMap&Secret
-
-  ![image-20221221104202510](.image/09-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/image-20221221104202510.png)
-
-## 1.2 使用
+## 1.1 常见用法
 
 * yaml构建
 
@@ -39,7 +25,9 @@
   kubectl get cm
   ```
 
-## 1.3 命令
+## 1.2 命令
+
+### 1.2.1 常规命令
 
 ```shell
 kubectl create configmap cm-name [OPTIONS]
@@ -65,11 +53,21 @@ kubectl create configmap cm-name [OPTIONS]
   --from-literal=level=INFO
   ```
 
-# 2. ConfigMap yaml
+### 1.2.2 热更新
 
-## 2.1 环境变量
+* 热更新
 
-### 2.1.1 指定配置
+  ```shell
+  kubectl create configmap cm-name --from-file=conf/a.conf --dry-run=client -oyaml | kubectl replace -f -
+  ```
+
+  由于直接编辑yaml会涉及换行符问题, 所以直接创建一个同名configmap, 再replace即可.
+
+subPath 无法热更新
+
+# 2. yaml
+
+## 2.1 指定配置
 
 ```yaml
 apiVersion: apps/v1
@@ -101,7 +99,7 @@ spec:
                 key: a         # 引用data.a 的value
 ```
 
-### 2.1.2 批量导入
+## 2.2 批量导入
 
 ```yaml
 apiVersion: apps/v1
@@ -129,7 +127,7 @@ spec:
           profix: TEST_      # 为导入的变量统一增加前缀, 例如: TEST_a
 ```
 
-### 2.1.3 文件挂载
+## 2.3 文件挂载
 
 * yaml
 
@@ -172,7 +170,8 @@ spec:
               - name: redisconf  # 引用 volumes.name
                 mountPath: /etc/config  # 指定同步到Pod中的位置, 注意:多个时, mountPath的value不能重复
               - name: mysqlconf
-                mountPath: /etc/myconfig
+                mountPath: /etc/nginx/nginx.conf  # 仅挂载一个文件
+                subPath: nginx.conf  # 指定挂载文件 nginx.config
         volumes:
           - name: redisconf
             configMap:
@@ -205,175 +204,4 @@ spec:
    # 等待生效, 大概30s左右
    kubectl exec -it cm-deploy-67784f78f9-rwrcv -- bash -c 'cat /etc/config/game1.conf'
   ```
-
-# 3. Secret
-
-软加密, 使用base64进行加密, 整体用法类似ConfigMap
-
-## 3.1 使用
-
-* 设置账号密码
-
-  ```yaml
-  echo "admin" > secert/username.txt
-  echo "password" > secert/password.txt
-  ```
-
-* 创建
-
-  ```shell
-  # generic: 类型
-  kubectl create secret generic secret-file --from-file=secert/
-  ```
-
-* 查看
-
-  ```shell
-  # 查看
-  kubectl get secret secret-file -oyaml
-  
-  # 源数据查看(解码)
-  kubectl get secret db-user-pass -oyaml | grep password | awk '{print $NF}' | base64 -d
-  ```
-
-## 3.2 命令
-
-```shell
-kubectl create secret generic secret-name [OPTIONS]
-```
-
-* --from-file: 添加配置文件或者文件夹
-
-  ```shell
-  --from-file=conf/ --from-file=conf/a.conf
-  --from-file=abc=conf/a.conf
-  ```
-
-* --from-env-file: 直接导入文件中的变量
-
-  ```shell
-  --from-env-file=game.conf
-  ```
-
-* --from-literal: 直接导入变量
-
-  ```shell
-  # 变量: {"level": "INFO"}
-  --from-literal=level=INFO
-  ```
-
-# 4. Secret yaml
-
-## 4.1 手动加密
-
-* yaml
-
-  ```yaml
-  apiVersion: v1
-  data:  # 密文数据
-    password: cGFzc3dvcmQK  # base64编码
-    username: YWRtaW4K  # base64编码
-  kind: Secret
-  metadata:
-    name: db-user-pass
-  type: Opaque  # 加密类型
-  ```
-
-## 4.2 自动加密
-
-* yaml
-
-  ```yaml
-  apiVersion: v1
-  StringData:  # 明文数据, 会自动加密
-    password: cGFzc3dvcmQK
-    username: YWRtaW4K
-  kind: Secret
-  metadata:
-    name: db-user-pass
-  type: Opaque  # 加密类型
-  ```
-
-## 4.3 私有仓库镜像拉取
-
-### 4.3.1 aliyun使用镜像仓库
-
-按照对应要求配置即可: https://cr.console.aliyun.com/repository/cn-hangzhou/hpcm
-
-* 打包镜像
-
-  ```shell
-  docker tag 88736fe82739 registry.cn-hangzhou.aliyuncs.com/hpcm/repo:v1.0.0
-  ```
-
-* 登录仓库
-
-  ```shell
-  docker login --username=56***31@qq.com registry.cn-hangzhou.aliyuncs.com
-  ```
-
-* 上传镜像
-
-  ```shell
-  docker push registry.cn-hangzhou.aliyuncs.com/hpcm/repo:v1.0.0
-  ```
-
-* 拉取镜像
-
-  ```shell
-  docker pull registry.cn-hangzhou.aliyuncs.com/hpcm/repo:v1.0.0
-  ```
-
-### 4.3.2 登录拉取镜像
-
-* 配置docker源账号密码信息
-
-  ```shell
-  # 创建一个
-  # 类型为: docker-registry
-  # name: docker-secret 的secret
-  kubectl create secret docker-registry docker-secret --docker-username=56***1@qq.com --docker-password='ab***1' --docker-email=h***m@foxmail.com --docker-server=registry.cn-hangzhou.aliyuncs.com 
-  ```
-
-* yaml
-
-  ```yaml
-  # secret-aliyun.yaml
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    labels:
-      app: secret-deploy
-    name: secret-deploy
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
-        app: secret-deploy
-    template:
-      metadata:
-        labels:
-          app: secret-deploy
-      spec:
-        imagePullSecrets:
-          - name: docker-secret  # 指定上面的secret的name
-        containers:
-        - image: nginx
-          name: nginx
-  ```
-
-* 创建
-
-  ```shell
-  kubectl create -f secret-aliyun.yaml
-  ```
-
-* 检查
-
-  ```shell
-  # 查看pod是否创建完成
-  kubectl get pod
-  ```
-
-  
 
