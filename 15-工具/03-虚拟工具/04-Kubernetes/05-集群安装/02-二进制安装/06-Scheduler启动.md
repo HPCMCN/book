@@ -13,6 +13,7 @@ vim /usr/lib/systemd/system/kube-scheduler.service
   [Service]
   ExecStart=/usr/local/bin/kube-scheduler \
         --v=2 \
+        --feature-gates=EphemeralContainers=true  # 开启临时容器
         --logtostderr=true \
         --address=127.0.0.1 \
         --leader-elect=true \

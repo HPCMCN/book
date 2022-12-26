@@ -17,6 +17,7 @@
   [Service]
   ExecStart=/usr/local/bin/kube-apiserver \
         --v=2  \
+        --feature-gates=EphemeralContainers=true  \  # 开启临时容器
         --logtostderr=true  \
         --allow-privileged=true  \
         --bind-address=0.0.0.0  \
@@ -57,7 +58,7 @@
   [Install]
   WantedBy=multi-user.target
   ```
-  
+
   
 
 * master02
@@ -73,6 +74,7 @@
   [Service]
   ExecStart=/usr/local/bin/kube-apiserver \
         --v=2  \
+        --feature-gates=EphemeralContainers=true  \  # 开启临时容器
         --logtostderr=true  \
         --allow-privileged=true  \
         --bind-address=0.0.0.0  \
@@ -127,6 +129,7 @@
   [Service]
   ExecStart=/usr/local/bin/kube-apiserver \
         --v=2  \
+        --feature-gates=EphemeralContainers=true  \  # 开启临时容器
         --logtostderr=true  \
         --allow-privileged=true  \
         --bind-address=0.0.0.0  \

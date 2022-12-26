@@ -61,6 +61,7 @@
   [Service]
   ExecStart=/usr/local/bin/kube-proxy \
     --config=/etc/kubernetes/kube-proxy.yaml \
+    --feature-gates=EphemeralContainers=true  # 开启临时容器
     --v=2
   
   Restart=always
@@ -77,6 +78,8 @@
   # /etc/kubernetes/kube-proxy.yaml
   apiVersion: kubeproxy.config.k8s.io/v1alpha1
   bindAddress: 0.0.0.0
+  featureGates:  # 开启临时容器
+    EphemeralContainers: true
   clientConnection:
     acceptContentTypes: ""
     burst: 10

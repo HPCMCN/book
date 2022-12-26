@@ -12,6 +12,7 @@
   [Service]
   ExecStart=/usr/local/bin/kube-controller-manager \
         --v=2 \
+        --feature-gates=EphemeralContainers=true  # 开启临时容器
         --logtostderr=true \
         --address=127.0.0.1 \
         --root-ca-file=/etc/kubernetes/pki/ca.pem \
@@ -31,8 +32,8 @@
         --node-cidr-mask-size=24
         
   Restart=always
-  RestartSec=10s
-
+RestartSec=10s
+  
   [Install]
   WantedBy=multi-user.target  
   ```
