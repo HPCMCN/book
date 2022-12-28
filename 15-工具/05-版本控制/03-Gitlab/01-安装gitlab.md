@@ -37,12 +37,18 @@ docker run \
 * 安装
 
   ```shell
-  rpm -hiv xxx.rpm
+  yum install gitlab-ce-14.2.3-ce.0.el7.x86_64.rpm  -y
   ```
 
 # 2. 配置
 
-## 2.1 禁用prometheus
+## 2.1 配置修改
+
+* 域名修改
+
+  ```shell
+  external_url 'http://10.111.0.11'
+  ```
 
 * 禁用prometheus
 
@@ -57,6 +63,12 @@ docker run \
   ```shell
   gitlab-ctl reconfigure
   gitlab-ctl restart 
+  ```
+
+* 查看密码
+
+  ```shell
+  cat /etc/gitlab/init
   ```
 
   
