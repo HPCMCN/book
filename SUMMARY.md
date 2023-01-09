@@ -315,6 +315,8 @@
       * [02-pickle](./01-Python/10-内置/06-数据解析/02-pickle.md)
       * [03-json](./01-Python/10-内置/06-数据解析/03-json.md)
       * [04-xml](./01-Python/10-内置/06-数据解析/04-xml.md)
+      * [05-struct](./01-Python/10-内置/06-数据解析/05-struct.md)
+      * [06-argparse](./01-Python/10-内置/06-数据解析/06-argparse.md)
     * [07-abc](./01-Python/10-内置/07-abc.md)
     * [08-contextlib](./01-Python/10-内置/08-contextlib.md)
     * [09-gc](./01-Python/10-内置/09-gc.md)
