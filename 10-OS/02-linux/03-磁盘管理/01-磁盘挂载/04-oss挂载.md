@@ -20,6 +20,13 @@
   chmod 640 /etc/passwd-ossfs
   ```
 
+* 同步时间
+
+  ```shell
+  # 需要同步时间, 否则挂载是会报错: RequestTimeTooSkewed
+  ntpdate time2.aliyun.com
+  ```
+
 * 文件挂载
 
   ```shell

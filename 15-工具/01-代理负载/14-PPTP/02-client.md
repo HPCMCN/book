@@ -41,7 +41,7 @@
 * 关闭vpn
 
   ```shell
-  pkill pppd
+  killall pppd
   ```
 
   
