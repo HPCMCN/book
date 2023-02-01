@@ -103,5 +103,19 @@ finanlly:
 
 
 
+### 示例
+
+```python
+import os
+import re
+import pexpect
+ 
+cmd = pexpect.spawn('/bin/bash -c "ps aux | grep {} | grep -v grep"'.format(input()))
+cmd.expect(pexpect.EOF)
+data = cmd.before.decode().replace("\r\n", "\n")
+for i in [line.split()[1] for line in data.split("\n") if line.strip()]:
+    os.system("kill -9 {}".format(i))
+```
+
 
 
