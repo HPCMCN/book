@@ -156,3 +156,15 @@
   ```
 
   ![image-20230202170337440](02-%E8%87%AA%E5%AE%9A%E4%B9%89packages/.image/01-setup/image-20230202170337440.png)
+
+## 2.4 版本更新
+
+* 修改 `pyproject.toml`中的`version`
+
+* 删除`dist/`中的文件, 否则会提示已存在错误
+
+* 发布到pypi
+
+  ```shell
+  python -m twine upload dist/*
+  ```
