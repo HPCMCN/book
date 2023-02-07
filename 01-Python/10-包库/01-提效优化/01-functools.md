@@ -1,0 +1,558 @@
+# 1. 函数
+
+## 1.1 参数操作
+
+### 1.1.1 partial
+
+对函数的参数进行扩充操作.(偏函数)
+
+```python
+def partial(func, /, *args, **keywords):
+return func
+```
+
+* fun: `function`, 需要拓展变量的函数
+* args: `args`, 需要拓展的位置参数
+* keywords: `kwargs`, 需要拓展的关键字参数
+
+**示例**
+
+```python
+from functools import partial
+def fun(a, b, c):
+    print("此函数必须接收三个参数: ", a, b, c)
+
+def tex(func, a):
+    """函数托管执行, 比如线程运行的函数托管imap, 只允许传入一个参数"""
+    return func(a)
+
+f = partial(fun, 1, 2)
+tex(f, 3)
+```
+
+输出
+
+```python
+此函数必须接收三个参数:  1 2 3
+```
+
+### 1.1.2 singledispatch
+
+对不同类型的参数, 分发到不同函数中执行.(单调泛函数)
+
+```python
+@singledispatch
+def fun(*args):
+	pass
+
+@fun.register
+def do_1(ver, *args):
+    pass
+```
+
+**示例**
+
+```python
+from functools import singledispatch
+
+@singledispatch
+def fun(arg, verbose=False):
+    """其他类型"""
+    if verbose:
+        print("fun执行: ", end=" ")
+    print(arg)
+
+@fun.register(int)
+def _(arg, verbose=False):
+    """整形"""
+    if verbose:
+        print("int执行: ", end=" ")
+    print(arg)
+
+@fun.register(list)
+def _(arg, verbose=False):
+    """列表类型"""
+    if verbose:
+        print("list执行: ", end=" ")
+    for i, elem in enumerate(arg):
+        print(i, elem)
+
+@fun.register(complex)
+def _(arg, verbose=False):
+    """复数类型"""
+    if verbose:
+        print("complex执行: ", end=" ")
+    print(arg.real, arg.imag)
+
+def nothing(arg, verbose=False):
+    """空类型"""
+    print("nothing执行: ", end=" ")
+    print(arg)
+
+fun.register(type(None), nothing)
+
+@fun.register(float)
+@fun.register(Decimal)
+def _(arg, verbose=False):
+    """小数类型"""
+    if verbose:
+        print("float执行:", end=" ")
+    print(arg / 2)
+
+
+print("支持分发的全部类型: ", fun.registry.keys())
+print(_ is fun)  # 说明
+
+fun("12342", verbose=True)
+fun(123, verbose=True)
+fun([123, 234, 345], verbose=True)
+fun(complex(1), verbose=True)
+fun(None, verbose=True)
+fun(0.123, verbose=True)
+```
+
+输出
+
+```python
+支持分发的全部类型:  dict_keys([<class 'int'>, <class 'list'>, <class 'complex'>, <class 'object'>, <class 'NoneType'>, <class 'decimal.Decimal'>, <class 'float'>])
+False
+fun执行:  12342
+int执行:  123
+list执行:  0 123
+1 234
+2 345
+complex执行:  1.0 0.0
+nothing执行:  None
+float执行: 0.0615
+```
+
+## 1.2 结果操作
+
+### 1.2.1 reduce
+
+对函数的返回值进行累积处理. 
+
+```python
+def reduce(function, iterable, initializer=None):
+return function_value
+```
+
+* function: `function`, 需要执行的函数
+* iterable: `iterable`, 函数的参数列表
+* initializer: `value`, 初始累积数据
+
+**示例**
+
+```python
+# 对结果进行累加
+import time
+from functools import wraps, reduce
+def clock(func):
+    @wraps(func)
+    def clocked(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        use_time = time.time() - start_time
+        name = func.__name__
+        param = reduce(lambda x, y: x + ", " + str(y[0]) + "=" + str(y[1]) if x else str(y[0]) + "=" + str(y[1]), kwargs.items(),
+                       reduce(lambda x, y: x + "," + str(y) if x else str(y), args, ""))
+        print("[{:.5f}s] {}({}) ==> {}".format(use_time, name, param, result))
+        return result
+    return clocked
+
+@clock
+def pt(a=1):
+    time.sleep(2)
+    print("test massage", a)
+
+pt(a=3)
+```
+
+输出
+
+```python
+test massage 3
+[2.00075s] pt(a=3) ==> None
+```
+
+### 1.2.2 itertools.accumulate
+
+功能和`reduce`一样, 不同在于会输出每个阶段的值.
+
+```python
+def accumulate(iterable, func=operator.add):
+return iterable
+```
+
+* iterable: `iterable`, 需要迭代处理的参数
+* func: `function`, 需要对参数处理的函数, 需要接受两个参数, 第一个参数为上次此函数的结果, 第二个参数为`iterable`迭代出来的元素
+
+**类似**
+
+```python
+def accumulate(iterable, func=operator.add):
+    """类似reduce, 不过会把每个步骤都输出"""
+    ite = iter(iterable)
+    try:
+        total = next(ite)
+    except StopIteration:
+        return
+    yield total
+    for i in ite:
+        total = func(total, i)
+        yield total
+```
+
+**示例**
+
+```python
+from itertools import accumulate
+from functools import reduce
+range_list = range(5)
+for i in accumulate(range_list, lambda x, y: x + y):
+    print(i)
+
+print(reduce(lambda x, y: x + y, range_list))
+```
+
+输出
+
+```python
+0
+1
+3
+6
+10
+10
+```
+
+### 1.2.3 lru_cache
+
+对函数执行结果进行缓存
+
+```python
+def lru_cache(maxsize = 128，typed = False):
+return function_value
+```
+
+* maxsize: `int`, 函数缓存的最大字节
+* typed: `bool`, 是否区分类型(如: 3.0和3)
+
+**示例**
+
+```python
+# 缓存函数运行结果, 提高函数运行效率
+from functools import lru_cache, reduce, wraps
+import time
+
+
+def clock(func):
+    @wraps(func)
+    def clocked(*args, **kwargs):
+        start_time = time.time()
+        result = func(*args, **kwargs)
+        use_time = time.time() - start_time
+        name = func.__name__
+        param = reduce(lambda x, y: x + ", " + str(y[0]) + "=" + str(y[1]) if x else str(y[0]) + "=" + str(y[1]), kwargs.items(),
+                       reduce(lambda x, y: x + "," + str(y) if x else str(y), args, ""))
+        print("[{:.5f}s] {}({}) ==> {}".format(use_time, name, param, result))
+        return result
+    return clocked
+
+@lru_cache(maxsize=32)
+@clock
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+
+print(fib(100))
+```
+
+输出
+
+```python
+...
+[0.00103s] fib(98) ==> 135301852344706746049
+[0.00103s] fib(99) ==> 218922995834555169026
+[0.00103s] fib(100) ==> 354224848179261915075
+354224848179261915075
+```
+
+## 1.3 信息操作
+
+### 1.3.1 wrap
+
+修改传递的函数, 并修改自省信息. 主要包含以下属性:
+
+`'__module__', '__name__', '__qualname__', '__doc__', '__annotations__'`.
+
+常用作装饰器中内部函数信息的修改.
+
+```python
+def wrapps(func):
+return function_value
+```
+
+* func: `func`, 被装饰的函数
+
+**示例**
+
+```python
+from functools import wraps
+
+def my_decorator1(f):
+    """自定义装饰器"""
+    def wrapper(*args, **kwargs):
+        """装饰器1内部函数"""
+        print('调用装饰函数1')
+        return f(*args, **kwargs)
+    return wrapper
+
+def my_decorator2(f):
+    """自定义装饰器"""
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        """装饰器2内部函数"""
+        print('调用装饰函数2')
+        return f(*args, **kwargs)
+    return wrapper
+
+@my_decorator1
+def demo1():
+    """Demo1函数"""
+    print('Doing something1')
+
+@my_decorator2
+def demo2():
+    """Demo2函数"""
+    print('Doing something2')
+
+print(demo1.__name__)
+print(demo2.__name__)
+print(demo1.__doc__)
+print(demo2.__doc__)
+demo1()
+demo2()
+```
+
+输出
+
+```python
+wrapper
+demo2
+装饰器1内部函数
+Demo2函数
+调用装饰函数1
+Doing something1
+调用装饰函数2
+Doing something2
+```
+
+## 1.4 执行操作
+
+### 1.4.1 itertools.starmap
+
+批量执行函数.
+
+类似 多任务中的`map`, 区别在于, 元素中每个元素在传入`func`时, 会自动拆包操作
+
+```python
+def starmap(func, iterable):
+return iterable
+```
+
+* func: `function`, 需要进行处理的函数
+* iterable: `iterable`, 函数的参数, 此参数在传入函数时会进行拆包处理
+
+**类似代码**
+
+```python
+def starmap(function, iterable):
+	for args in iterable:
+        yield function(*args)
+```
+
+# 2. 功能
+
+## 2.1 运算对象转换
+
+### 2.1.1 cmp_to_key
+
+将函数转换为一个可以比较的对象.
+
+ 该对象主要用于排序, 针对比较函数, 如: 
+
+* sorted
+
+* min
+
+* max
+
+* itertools.groupby
+
+  ...
+
+```python
+def cmp_to_key(func):
+return object
+```
+
+* func: `funtion`, 需要使用的比较规则
+
+**示例**
+
+```python
+from functools import cmp_to_key
+t_list = [1, 5, 4]
+
+def sorting(x, y):
+    """如果直接用这个函数作为key, 那么只能获取到一个参数x, 无法获取到y进行两者对比"""
+    print(x, y)
+    if x > y:
+        return 1
+    elif x < y:
+        return -1
+    else:
+        return 0
+
+print(cmp_to_key(sorting)(1) > cmp_to_key(sorting)(2))
+print("--------------------------------")
+print(sorted(t_list, key=cmp_to_key(sorting)))
+```
+
+输出
+
+```python
+1 2
+False
+--------------------------------
+5 1
+4 5
+4 5
+4 1
+[1, 4, 5]
+```
+
+### 2.1.2 total_ordering
+
+根据现有的运算方法, 自动推算出其他的比较方法.
+
+只要实现`__eq__`和其他比较魔法方法中的任意一个. 即可推算出全部的比较运算.
+
+```python
+def total_ordering(cls):
+return cls
+```
+
+* cls: `class`, 需要补全的类
+
+**示例**
+
+```python
+from functools import total_ordering
+
+
+# noinspection PyUnresolvedReferences
+@total_ordering
+class Student:
+    def _is_valid_operand(self, other):
+        return (hasattr(other, "lastname") and
+                hasattr(other, "firstname"))
+
+    def __eq__(self, other):
+        if not self._is_valid_operand(other):
+            return NotImplemented
+        return ((self.lastname.lower(), self.firstname.lower()) ==
+                (other.lastname.lower(), other.firstname.lower()))
+
+    def __lt__(self, other):
+        if not self._is_valid_operand(other):
+            return NotImplemented
+        return ((self.lastname.lower(), self.firstname.lower()) <
+                (other.lastname.lower(), other.firstname.lower()))
+
+
+s1 = Student()
+s1.lastname = "a"
+s1.firstname = "b"
+s2 = Student()
+s2.lastname = "c"
+s2.firstname = "d"
+print(s1 < s2)
+print(s1 >= s2)
+print(s1 <= s2)
+print(s1 < s2)
+print(s1 == s2)
+```
+
+输出
+
+```python
+True
+False
+True
+True
+False
+```
+
+# 3. 模块报错处理
+
+## 3.1 版本报错
+
+* 错误信息
+
+  ```shell
+    File "C:\Python27\lib\functools.py", line 56, in <lambda>
+      '__lt__': [('__gt__', lambda self, other: other < self),
+    ...
+    File "C:\Python27\lib\functools.py", line 56, in <lambda>
+      '__lt__': [('__gt__', lambda self, other: other < self),
+  RuntimeError: maximum recursion depth exceeded in cmp
+  ```
+
+* 解决方案
+
+  修改源码, 将如下信息进行修改
+
+  ```python
+  convert = {
+          '__lt__': [('__gt__', lambda self, other: other < self),
+                     ('__le__', lambda self, other: not other < self),
+                     ('__ge__', lambda self, other: not self < other)],
+          '__le__': [('__ge__', lambda self, other: other <= self),
+                     ('__lt__', lambda self, other: not other <= self),
+                     ('__gt__', lambda self, other: not self <= other)],
+          '__gt__': [('__lt__', lambda self, other: other > self),
+                     ('__ge__', lambda self, other: not other > self),
+                     ('__le__', lambda self, other: not self > other)],
+          '__ge__': [('__le__', lambda self, other: other >= self),
+                     ('__gt__', lambda self, other: not other >= self),
+                     ('__lt__', lambda self, other: not self >= other)]
+      }
+  
+  ```
+
+  修改为
+
+  ```python
+      convert = {
+          '__lt__': [('__gt__', lambda self, other: not (self < other or self == other)),
+                     ('__le__', lambda self, other: self < other or self == other),
+                     ('__ge__', lambda self, other: not self < other)],
+          '__le__': [('__ge__', lambda self, other: not self <= other or self == other),
+                     ('__lt__', lambda self, other: self <= other and not self == other),
+                     ('__gt__', lambda self, other: not self <= other)],
+          '__gt__': [('__lt__', lambda self, other: not (self > other or self == other)),
+                     ('__ge__', lambda self, other: self > other or self == other),
+                     ('__le__', lambda self, other: not self > other)],
+          '__ge__': [('__le__', lambda self, other: (not self >= other) or self == other),
+                     ('__gt__', lambda self, other: self >= other and not self == other),
+                     ('__lt__', lambda self, other: not self >= other)]
+      }
+  
+  ```
+
+  
+
