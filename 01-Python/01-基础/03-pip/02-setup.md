@@ -25,6 +25,8 @@
 
 * pip打包文件 `pyproject.toml`
 
+  可以查看官方文档进行配置: https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+  
   ```
   [build-system]
   requires = ["setuptools"]
@@ -61,6 +63,8 @@
       "Programming Language :: Python :: Implementation :: CPython",
       "Programming Language :: Python :: Implementation :: PyPy",
   ]
+  # 安装时候生成exe, 并加入环境变量中, 可以直接执行这个exe
+  entry-points={console_scripts=['cmd_name = cookiecutter.__main__:main']}
   dependencies = [
       #  "httpx",
       #  "gidgethub[httpx]>4.0.0",
