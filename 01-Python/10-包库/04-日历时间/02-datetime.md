@@ -138,8 +138,11 @@ return datetime
 **示例**
 
 ```python
-In [11]: datetime.datetime.fromtimestamp(time.time())                                             
+In [11]: datetime.datetime.fromtimestamp(time.time())                                 
 Out[11]: datetime.datetime(2020, 11, 13, 23, 40, 44, 598331)
+# 将秒  转换成  时分秒
+a = 88.57281
+print(datetime.fromtimestamp(a) - datetime.fromtimestamp(0))
 ```
 
 #### > timestamp
