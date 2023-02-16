@@ -32,6 +32,7 @@
   requires = ["setuptools"]
   build-backend = "setuptools.build_meta"
   
+  # https://packaging.python.org/en/latest/specifications/declaring-project-metadata/
   [project]
   name = "cron_log"
   version = "1.0.0"
