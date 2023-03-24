@@ -31,7 +31,7 @@
 
   ```shell
   mkdir /data
-  ossfs hz-hpcm /data -o url=http://oss-cn-hangzhou.aliyuncs.com
+  ossfs hz-hpcm /data -o url=http://oss-cn-hangzhou.aliyuncs.com -o allow_other
   ```
 
 * 解除挂载
