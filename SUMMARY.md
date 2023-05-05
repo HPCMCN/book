@@ -770,6 +770,7 @@
   * [06-DevOps](./15-工具/06-DevOps/README.md)
     * [02-jenkins](./15-工具/06-DevOps/02-jenkins/README.md)
       * [01-安装](./15-工具/06-DevOps/02-jenkins/01-安装.md)
+      * [02-简单制作流水线](./15-工具/06-DevOps/02-jenkins/02-简单制作流水线.md)
     * [03-harbor](./15-工具/06-DevOps/03-harbor/README.md)
       * [01-安装](./15-工具/06-DevOps/03-harbor/01-安装.md)
   * [08-抓包](./15-工具/08-抓包/README.md)
