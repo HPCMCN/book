@@ -72,6 +72,7 @@
         * [07-定时任务](./01-Python/02-后端/02-Flask/02-project/07-定时任务.md)
         * [08-Basic认证-Flask](./01-Python/02-后端/02-Flask/02-project/08-Basic认证-Flask.md)
         * [09-APScheduler-Flask](./01-Python/02-后端/02-Flask/02-project/09-APScheduler-Flask.md)
+        * [10-序列化与反序列化](./01-Python/02-后端/02-Flask/02-project/10-序列化与反序列化.md)
     * [03-Django](./01-Python/02-后端/03-Django/README.md)
       * [01-django](./01-Python/02-后端/03-Django/01-django/README.md)
         * [01-Django](./01-Python/02-后端/03-Django/01-django/01-Django/README.md)
