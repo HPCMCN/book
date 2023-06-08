@@ -95,20 +95,32 @@ Change font (Zoom) with Ctrl+Mouse Wheel  # 鼠标放大缩小字体
 
 ## 4.1 头文件配置
 
-依次点击:
+* 处理包生成时, 出现重复`.py`问题
 
-```bash
-File->settings->Editor->File and Code Templates->Python Script 
-```
+  File->settings->Editor->File and Code Templates->include
 
-添加如下信息:
+  创建一个a.py文件
 
-```bash
-# -*- coding:utf-8 -*-
-# author: HPCM
-# time: ${DATE} ${TIME}
-# file: ${NAME}.py
-```
+  ```shell
+  #set( $dotIndex = $NAME.lastIndexOf('.') )
+  #if( $dotIndex > 0 )
+      #set( $fileNameWithoutExtension = $NAME.substring(0, $dotIndex) )
+  #else
+      #set( $fileNameWithoutExtension = $NAME )
+  #end
+  # file: $fileNameWithoutExtension
+  ```
+
+* 生成头部信息
+
+  File->settings->Editor->File and Code Templates->Python Script 
+
+  ```shell
+  # -*- coding:utf-8 -*-
+  # author: HPCM
+  # time: $DATE TIME
+  #parse("a.py").py
+  ```
 
 ## 4.2 PyCharm用root运行Python
 
