@@ -806,6 +806,13 @@ db.session.commit()
   In [18]: ObjectMore1.query.filter(ObjectMore1.more1_name!="more1_1").all()
   Out[18]: [<ObjectOne: more1_2>]
   
+  ## or/and:
+  from sqlalchemy import or_, and_, not_
+  # 注意两个括号不能取消
+  ObjectMore1.query.filter((ObjectMore1.more1_name=="more1_1") & (ObjectMore1.more1_name=="more1_2")).all()
+  #或者
+  ObjectMore1.query.filter(or_(ObjectMore1.more1_name=="more1_1", ObjectMore1.more1_name=="more1_2")).all()
+  
   ## 大于/等于/小于 >=/==/<=/>/<  或者__gt__()....
   In [22]: ObjectMore1.query.filter(ObjectMore1.more1_name<="more1_1").all()
   Out[22]: [<ObjectOne: more1_1>]
