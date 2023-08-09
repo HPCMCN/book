@@ -44,7 +44,13 @@
    zerotier-cli join network_id
    ```
 
-# 3. 授权客户端
+# 3. Android
+
+下载链接: https://github.com/kaaass/ZerotierFix/releases/tag/1.0.9
+
+和上面类似, 直接看看就会
+
+# 4. 授权客户端
 
 登录ui, 进行如下设置
 
