@@ -42,6 +42,7 @@
 
    ```shell
    zerotier-cli join network_id
+   zerotier-cli leave network_id  # 删除网络, 重新添加时, 需要执行此操作, 防止网卡不生效
    ```
 
 # 3. Android
