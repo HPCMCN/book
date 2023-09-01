@@ -244,9 +244,10 @@ docker image load  -i 加载的tar包镜像
 2. 导入
 
    ```bash
+   [root@localhost appgess]# gzip -d docker.tar.gz   # 解档
    [root@localhost appgess]# docker image load -i docker.tar
-   ```
-
+```
+   
    
 
 # 4. 导入container为image
