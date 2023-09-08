@@ -1,9 +1,15 @@
 # 1. windows
 
 1. 官方下载一个client: https://www.zerotier.com/download/
+
 2. 安装完成后, 进入: `C:\ProgramData\ZeroTier\One`
+
 3. 将服务端的 planet 文件, 给替换掉
+
 4. 重启 zerotier 服务
+
+   ![image-20230908110240816](.image/02-client/image-20230908110240816.png)
+
 5. 连接服务端发布的 网络id
 
 # 2. linux

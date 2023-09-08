@@ -15,7 +15,7 @@
 3. 开放防火墙端口如下:
 
    ```shell
-   TCP:9993  TCP: 3443
+   TCP/UDP(控制调度):9993  TCP: 3000  TCP(高端口, 用于p2p连接, 代码内置): 50000-59999
    ```
 
 4. 查看秘钥信息
@@ -91,6 +91,36 @@
     netstat -ano | grep 9993
     ```
 
+**注意**
+
+ 如果这里启动失败
+
+* 直接执行
+
+  ```shell
+  /opt/key-networks/ztncui/ztncui 
+  #观察报错信息, 并进行修复即可. 我这里面
+  ```
+
+* 我这里面遇到了, glibc缺少glibcxx_3.4.20
+
+  直接下载, 并修改软连接, 然后重启服务即可
+
+  ```shell
+  wget http://www.vuln.cn/wp-content/uploads/2019/08/libstdc.so_.6.0.26.zip
+  cp libstdc++.so.6.0.26 /usr/lib64
+  cd /usr/lib64
+  mv libstdc++.so.6 libstdc++.so.6_bak
+  ln -s libstdc++.so.6.0.26 libstdc++.so.6
+  
+  # 检查glibcxx_3.4.20
+  strings /usr/lib64/libstdc++.so.6 | grep GLIBCXX
+  
+  systemctl restart zerotier-one.service
+  ```
+
+  
+
 # 2. UI搭建
 
 1. 安装ui
@@ -103,7 +133,7 @@
 2. 接入zerotier
 
    ```shell
-   # /opt/key-networks/ztncui/.env
+   # vim /opt/key-networks/ztncui/.env
    # 加入一下信息
    ZT_TOKEN=这里是文件authtoken.secret的内容
    NODE_ENV=production
@@ -121,7 +151,7 @@
 4. 检查服务和端口
 
    ```shell
-   systemctl status zerotier-one.service
+   systemctl status ztncui
    netstat -ano | grep 3443
    ```
 
