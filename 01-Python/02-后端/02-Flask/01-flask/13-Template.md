@@ -198,31 +198,31 @@ def render_template(template_name_or_list, **context)
 
 | 过滤函数    | 作用                                       |
 | ----------- | ------------------------------------------ |
-| {{ "xx" \| safe }}       |启用标签转换                        |
-| {{ "xx" \| striptags}}   | 清除标签转换    |
-| {{ "xx" \| trim}}        | 去除前后空格          |
-| {{ "xx" \| capitalize}}  | 首字母大写      |
-| {{ "xx" \| upper}}       | 大写        |
-| {{ "xx" \| lower}}       | 小写 |
-| {{ "xx" \| title}}       | 大驼峰       |
-| {{ "xx" \| reverse}}     | 翻转   |
-| {{ obj \|attr("attr")}} | 动态获取obj.attr |
+| `{{ "xx" | safe }}`     |启用标签转换                        |
+| `{{ "xx" | striptags}}` | 清除标签转换    |
+| `{{ "xx" | trim}}`     | 去除前后空格          |
+| `{{ "xx" | capitalize}}` | 首字母大写      |
+| `{{ "xx" | upper}}`     | 大写        |
+| `{{ "xx" | lower}}`     | 小写 |
+| `{{ "xx" | title}}`     | 大驼峰       |
+| `{{ "xx" | reverse}}`   | 翻转   |
+| `{{ obj |attr("attr")}}` | 动态获取obj.attr |
 
 #### 2.4.1.2 列表过滤器
 
 | 过滤规则 | 作用         |
 | -------- | ------------ |
-| {{ "xx" \| first}}    | 获取第一个   |
-|  {{ "xx" \| last}}     | 获取最后一个 |
-| {{ "xx" \| sum}}      | 求和         |
-|  {{ "xx" \| sort}}     | 排序         |
-| {{ "xx" \| length}}   | 统计长度     |
+| `{{ "xx" | first}}`  | 获取第一个   |
+|  `{{ "xx" | last}}`   | 获取最后一个 |
+| `{{ "xx" | sum}}`    | 求和         |
+|  `{{ "xx" | sort}}`   | 排序         |
+| `{{ "xx" | length}}` | 统计长度     |
 
 #### 2.4.1.3 函数过滤器
 
 | 过滤规则  | 作用                   |
 | --------- | ---------------------- |
-| {{ None \| default("aa", True) }} |如果前面数据为None, 则显示aa|
+| `{{ None | default("aa", True) }}` |如果前面数据为None, 则显示aa|
 
 #### 2.4.1.4 代码块过滤器
 
@@ -246,7 +246,7 @@ xxxxxx
 
 **示例:**
 
-```python
+```shell
 @bp_template.route("/")
 def url1():
     test = [1, 2, 3, 4, 5, 6]
@@ -384,7 +384,7 @@ aabbccaa, 11234aa
 * request
   当前请求用户的request
   ```python
-  {{request.url}}
+  {{ request.url }}
   http://127.0.0.1
   ```
 
@@ -399,7 +399,7 @@ aabbccaa, 11234aa
   ```python
   {%for message in get_flashed_messages()%}
       {{message}}
-  {%endfor%}
+  {% endfor %}
   ```
 
 * url_for
@@ -476,9 +476,9 @@ aabbccaa, 11234aa
   
   ```
 
-效果
+* 效果
 
-![image-20200531165313273](.image/13-Template/image-20200531165313273.png)
+  ![image-20200531165313273](.image/13-Template/image-20200531165313273.png)
 
 
 
