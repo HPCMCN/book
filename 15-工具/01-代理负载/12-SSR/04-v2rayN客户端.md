@@ -34,5 +34,3 @@ https://github.com/v2ray/dist/
 
 ## 1.2 Android
 
-1. 
-
