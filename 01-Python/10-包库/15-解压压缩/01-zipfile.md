@@ -81,3 +81,13 @@ with tarfile.open("a.tar.gz", mode="w:gz", dereference=True) as fp:
 
 ### 1.3.1 getmembers
 
+### 1.3.2 getmember
+
+### 1.3.3 list
+
+> ```python
+> def list(self, verbose=True, *, members=None):
+> ```
+
+* verbose: bool, True类似`ls -l`, False将会调用`getmembers`
+* members: Iterable, 压缩文件中的文件, 默认是全部
