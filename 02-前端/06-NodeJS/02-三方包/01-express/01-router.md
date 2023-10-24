@@ -117,9 +117,8 @@
   app.listen(3000, "0.0.0.0", (req, res)=>{
       console.log("启动成功!")
   });
-  
   ```
-
+  
 * 方式二
 
   ```js
@@ -137,7 +136,7 @@
       if (!name || !name.length){
           res.json({
               message: "缺少name参数!",
-          })
+          });
       }else{
           next();
       }
