@@ -2,6 +2,16 @@
 
 超文本传输协议（HyperText Transfer Protocol）是一种应用层协议
 
+```python
+  foo://user:pass@example.com:8042/over/there?name=ferret#nose
+  \_/   \_______/\______________/\_________/ \_________/ \__/
+   |        |           |            |            |        |
+scheme  userinfo    host+port       path        query   fragment
+   |   ______________________________|__
+  / \ /                                 \
+  urn:example:animmmmmmmmmmal:ferret:nose
+```
+
 # 2. 请求报文
 
 ## 2.1 请求行(Request line)
