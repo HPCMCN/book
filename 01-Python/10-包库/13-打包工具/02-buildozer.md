@@ -86,7 +86,7 @@
 * 安装python环境
 
   ```shell
-  pip install cpython==0.29.19 buildozer
+  pip install cython==0.29.19 buildozer
   ```
 
 ### 1.3 编译环境
