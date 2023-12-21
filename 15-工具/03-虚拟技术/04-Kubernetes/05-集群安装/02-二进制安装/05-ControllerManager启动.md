@@ -4,15 +4,16 @@
 
   ```shell
   # /usr/lib/systemd/system/kube-controller-manager.service
+  # 注意: 本文件中的注释需要去掉, 否则无法启动
   [Unit]
   Description=Kubernetes Controller Manager
   Documentation=https://github.com/kubernetes/kubernetes
-  After=network.target
-
+After=network.target
+  
   [Service]
   ExecStart=/usr/local/bin/kube-controller-manager \
         --v=2 \
-        --feature-gates=EphemeralContainers=true  # 开启临时容器
+        --feature-gates=EphemeralContainers=true  \ # 开启临时容器
         --logtostderr=true \
         --address=127.0.0.1 \
         --root-ca-file=/etc/kubernetes/pki/ca.pem \
@@ -31,8 +32,8 @@
         --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.pem \
         --node-cidr-mask-size=24
         
-  Restart=always
-RestartSec=10s
+Restart=always
+  RestartSec=10s
   
   [Install]
   WantedBy=multi-user.target  

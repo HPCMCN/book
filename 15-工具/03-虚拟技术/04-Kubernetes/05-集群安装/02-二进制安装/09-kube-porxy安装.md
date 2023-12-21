@@ -1,5 +1,7 @@
 # 1. 配置文件
 
+本部分在 master01上执行即可
+
 ## 1.1 构建配置信息
 
 * 创建服务
@@ -49,7 +51,7 @@
   
   ```
 
-* 全部节点
+* 全部节点执行
 
   ```shell
   # /usr/lib/systemd/system/kube-proxy.service
@@ -61,7 +63,7 @@
   [Service]
   ExecStart=/usr/local/bin/kube-proxy \
     --config=/etc/kubernetes/kube-proxy.yaml \
-    --feature-gates=EphemeralContainers=true  # 开启临时容器
+    --feature-gates=EphemeralContainers=true \
     --v=2
   
   Restart=always

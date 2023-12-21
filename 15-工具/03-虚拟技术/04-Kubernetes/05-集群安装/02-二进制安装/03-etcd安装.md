@@ -109,7 +109,7 @@
 * master03
 
   ```shell
-  /etc/etcd/etcd.config.yml
+  #/etc/etcd/etcd.config.yml
   name: 'master03'  # 这里需要修改
   data-dir: /var/lib/etcd
   wal-dir: /var/lib/etcd/wal

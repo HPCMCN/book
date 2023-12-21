@@ -7,6 +7,7 @@
 * master01
 
   ```shell
+  # 注意: 本文件中的注释需要去掉, 否则无法启动
   # 注意service-cluster-ip-range=10.0.0.0/12   是server 网段
   # /usr/lib/systemd/system/kube-apiserver.service 
   [Unit]
