@@ -94,6 +94,7 @@
 9. 我们创建一个tag, 准备进行push操作
 
    ```shell
+   # library是harhor分配的项目名字, 可以直接改动
    docker tag ubuntu:16.04 hub.xxx.site/library/ubuntu:latest
    ```
 

@@ -819,6 +819,8 @@
       * [03-配置文件](./15-工具/09-进程守护/01-Supervisord/03-配置文件.md)
       * [04-rpc交互](./15-工具/09-进程守护/01-Supervisord/04-rpc交互.md)
   * [10-笔记记录](./15-工具/10-笔记记录/README.md)
+    * [01-sphinx](./15-工具/10-笔记记录/01-sphinx/README.md)
+      * [sphinx生成html](./15-工具/10-笔记记录/01-sphinx/sphinx生成html.md)
     * [30-gitbook](./15-工具/10-笔记记录/30-gitbook/README.md)
       * [01-安装](./15-工具/10-笔记记录/30-gitbook/01-安装.md)
       * [03-githup组合搭建blog](./15-工具/10-笔记记录/30-gitbook/03-githup组合搭建blog.md)

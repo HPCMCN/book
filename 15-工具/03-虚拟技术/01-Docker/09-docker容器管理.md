@@ -30,6 +30,7 @@ docker-compose built . # 创建image镜像
 docker-compose up      # 交互式启动当前目录中`docker-compose.yml`文件
 docker-compose up -d   # 后台启动
 docker-compose up --scale web=3 -d  # 批量启动, 也可以批量减少
+docker-compose -f local.yml up -d # 指定文件启动
 ```
 
 
