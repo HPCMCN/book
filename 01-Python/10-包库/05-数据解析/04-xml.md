@@ -27,5 +27,17 @@ parser = etree.parse("test.xml")
 
 # 利用xpath解析dom树
 print([x.text for x in parser.findall(".//tail/retcode")])
+ 
+root = etree.XML(byte)
+get_tag(root)
+#遍历所有参数
+def get_tag(root):
+        has_son = False
+        for node1 in root:
+            get_tag(node1)
+            if has_son is False:
+                has_son = True
+        if has_son is False:
+            print("{}: {}".format(root.tag, root.text))
 ```
 
