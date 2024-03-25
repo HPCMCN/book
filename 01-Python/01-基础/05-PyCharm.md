@@ -165,7 +165,7 @@ ctrl+x
 
 然后重新运行即可
 
-## 4.2 git变更代码后文件问题
+## 4.4 git变更代码后文件问题
 
 场景描述:
 
@@ -182,3 +182,24 @@ ctrl+x
 * 方法二: 直接删除PyCharm项目缓存
 
   找到`.idea`隐藏文件, 直接干掉. 然后重新导入项目即可
+
+## 4.5 linux中文输入法问题
+
+* Ubuntu
+
+  ```shell
+  export GTK_IM_MODULE=fcitx
+  export QT_IM_MODULE=fcitx
+  export XMODIFIERS=@im=fcitx
+  ```
+
+* CentOS
+
+  ```shell
+  export GTK_IM_MODULE=ibus
+  export QT_IM_MODULE=ibus
+  export XMODIFIERS=@im=ibus
+  ```
+
+  
+
