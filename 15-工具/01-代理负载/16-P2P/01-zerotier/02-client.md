@@ -4,13 +4,17 @@
 
 2. 安装完成后, 进入: `C:\ProgramData\ZeroTier\One`
 
-3. 将服务端的 planet 文件, 给替换掉
+3. 将服务端的 planet 文件(专用文件), 给替换掉
 
 4. 重启 zerotier 服务
 
    ![image-20230908110240816](.image/02-client/image-20230908110240816.png)
 
-5. 连接服务端发布的 网络id
+5. **管理权限**连接服务端发布的 网络id
+
+   ```
+   zerotier-cli join <network_id>
+   ```
 
 # 2. linux
 
@@ -32,10 +36,10 @@
    systemctl enable zerotier-one.service
    ```
 
-4. 同样替换planet文件
+4. 同样替换planet文件(专用文件)
 
    ```shell
-    /var/lib/zerotier-one/planet
+    cp ./planet /var/lib/zerotier-one/planet
    ```
 
 5. 重启服务
@@ -47,8 +51,8 @@
 6. 加入网络
 
    ```shell
-   zerotier-cli join network_id
-   zerotier-cli leave network_id  # 删除网络, 重新添加时, 需要执行此操作, 防止网卡不生效
+   zerotier-cli join <network_id>
+   zerotier-cli leave <network_id>  # 删除网络, 重新添加时, 需要执行此操作, 防止网卡不生效
    ```
 
 # 3. Android
