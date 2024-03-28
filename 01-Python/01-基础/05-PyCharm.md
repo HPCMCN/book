@@ -43,7 +43,7 @@
 
 ### 2.2 暴力激活
 
-破解工具: [下载](.image/05-PyCharm/jt.jar)
+`
 
 1. 打开PyCharm
 

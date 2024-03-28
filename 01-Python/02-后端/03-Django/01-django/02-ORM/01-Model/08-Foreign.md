@@ -166,9 +166,10 @@ class More(models.Model):
 
   ```python
   def edit():
-      more1 = one.to_more.all()[0]
-      more1.name = "more1_3"
-      more1.save()
+      one = One.objects.all()[0]
+      one.to_more.add(more1) # 一堆多绑定
+      #one.to_more.clear() # 清空关系
+      one.save()
       more1 = More.objects.all()[0]
       one = more1.to_one
       one.name = "one1_3"
@@ -243,7 +244,8 @@ class Many2(models.Model):
   def create():
       more1 = Many1.objects.create(name="more1_1")
       more2 = Many2.objects.create(name="more2_1")
-      more1.to_more2.add(more2)
+      more1.to_more2.add(more2)  # 添加关系
+      # more1.to_more2.clear()   # 清空关系
       more2.save()
       more1.save()
   ```
@@ -266,6 +268,8 @@ class Many2(models.Model):
       more2 = more1.to_more2.all().first()
       more2.name = "more2_2"
       more2.save()
+      # more1.to_more2.add(more2)  # 添加关系
+      # more1.to_more2.clear()   # 清空关系
       
       more2 = Many2.objects.all()[0]
       more1 = more2.to_more1.all().first()
