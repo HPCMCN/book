@@ -15,3 +15,5 @@ Tengine, 是由淘宝在nginx基础上进行的二次开发框架, 主要针对�
 
 LNMP = Linux + Nginx + MySQL + PHP
 
+官方文档: https://nginx.org/en/docs/
+
